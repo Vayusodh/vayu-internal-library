@@ -63,11 +63,39 @@ button{
 /* MAIN CONTENT */
 .main-content{
     display:none;
-    background:#f8fafc;
-    color:#111;
-    padding:40px;
+    width:100%;
 }
+<div class="main-content" id="mainContent">
 
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <span>📞 +91 XXXXX XXXXX</span>
+        <span>✉ library@vayu.com</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <img src="logo.png" class="nav-logo">
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="sop.html">SOP</a>
+            <a href="#">Policy</a>
+            <a href="#">Forms</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-overlay">
+            <h1>VAYU INTERNAL LIBRARY</h1>
+            <h2>Emerging Technologies</h2>
+            <p>Centralized Document Control & Secure Knowledge Hub</p>
+            <button onclick="location.href='sop.html'">Enter Library</button>
+        </div>
+    </section>
+
+</div>
 section{
     margin-bottom:40px;
 }
