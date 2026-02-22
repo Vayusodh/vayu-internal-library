@@ -93,9 +93,9 @@ section{
     </section>
 
     <section style="text-align:center;">
-        <button>SOP</button>
-        <button>Policy</button>
-        <button>Forms</button>
+        <button onclick="location.href='sop.html'">SOP</button>
+        <button onclick="location.href='policy.html'">SOP</button>
+        <button onclick="location.href='forms.html'">SOP</button>
     </section>
 
 </div>
@@ -103,11 +103,14 @@ section{
 <script>
 function checkPassword(){
     var pass=document.getElementById("password").value;
+    var error=document.getElementById("errorMsg");
+
     if(pass==="Vayu"){
         document.getElementById("loginBox").style.display="none";
         document.getElementById("mainContent").style.display="block";
     }else{
-        alert("Wrong Password");
+        error.style.display="block";
+        error.innerHTML="Access Denied. Please contact VAYU Team for authorized access.";
     }
 }
 </script>
