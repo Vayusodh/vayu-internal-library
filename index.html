@@ -121,6 +121,13 @@ section{
 </div>
 
 <script>
+
+       window.onload = function(){
+    if(sessionStorage.getItem("accessGranted") === "yes"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+    }
+}
 function checkPassword(){
     var pass=document.getElementById("password").value;
     var error=document.getElementById("errorMsg");
@@ -133,12 +140,6 @@ function checkPassword(){
         error.style.display="block";
         error.innerHTML="Access Denied. Please contact VAYU Team for authorized access.";
     }
-    window.onload = function(){
-    if(sessionStorage.getItem("accessGranted") === "yes"){
-        document.getElementById("loginBox").style.display="none";
-        document.getElementById("mainContent").style.display="block";
-    }
-}
 }
 </script>
 
