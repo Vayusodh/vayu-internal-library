@@ -126,12 +126,19 @@ function checkPassword(){
     var error=document.getElementById("errorMsg");
 
     if(pass==="Vayu"){
-        document.getElementById("loginBox").style.display="none";
-        document.getElementById("mainContent").style.display="block";
+    sessionStorage.setItem("accessGranted","yes");
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("mainContent").style.display="block";
     }else{
         error.style.display="block";
         error.innerHTML="Access Denied. Please contact VAYU Team for authorized access.";
     }
+    window.onload = function(){
+    if(sessionStorage.getItem("accessGranted") === "yes"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+    }
+}
 }
 </script>
 
