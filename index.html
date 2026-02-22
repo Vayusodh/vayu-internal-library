@@ -8,23 +8,19 @@
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg,#0f172a,#1e293b);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+    font-family:Arial, sans-serif;
+    background:#0f172a;
     color:white;
 }
 
+/* LOGIN SCREEN */
 .lock-container{
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    padding:40px;
-    border-radius:20px;
-    text-align:center;
-    width:350px;
-    box-shadow:0 0 40px rgba(0,0,0,0.6);
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
 }
 
 .logo{
@@ -32,110 +28,86 @@ body{
     margin-bottom:20px;
 }
 
-h2{
-    margin-bottom:20px;
-    font-weight:500;
-}
-
 input{
-    width:100%;
     padding:12px;
-    border-radius:8px;
+    border-radius:6px;
     border:none;
     margin-top:10px;
-    outline:none;
 }
 
 button{
-    width:100%;
-    padding:12px;
+    padding:12px 25px;
     margin-top:15px;
     border:none;
-    border-radius:8px;
+    border-radius:6px;
     background:#2563eb;
     color:white;
-    font-weight:bold;
     cursor:pointer;
-    transition:0.3s;
 }
 
-button:hover{
-    background:#1d4ed8;
-}
-
+/* MAIN CONTENT */
 .main-content{
     display:none;
+    background:#f8fafc;
+    color:#111;
     padding:40px;
+}
+
+section{
+    margin-bottom:40px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN PAGE -->
 <div class="lock-container" id="loginBox">
-
-    <!-- 🔥 CHANGE THIS IMAGE FILE NAME AFTER UPLOAD -->
     <img src="logo.png" class="logo">
-
     <h2>VAYU Internal Library</h2>
-    <p>Secure Access Portal</p>
-
     <input type="password" id="password" placeholder="Enter Password">
     <button onclick="checkPassword()">Unlock</button>
-
 </div>
 
-<div class="main-content" id="mainContent" style="display:none; padding:40px; background:#f8fafc; color:#111;">
+<!-- MAIN WEBSITE -->
+<div class="main-content" id="mainContent">
 
-    <section style="text-align:center; padding:50px 20px;">
-        <h1 style="font-size:40px;">Welcome to VAYU Internal Library</h1>
-        <p style="font-size:18px; color:#555;">
-            Centralized Document Control & Knowledge Hub
-        </p>
+    <section style="text-align:center;">
+        <h1>Welcome to VAYU Internal Library</h1>
+        <p>Centralized Document Control & Knowledge Hub</p>
     </section>
 
-    <section style="padding:40px; max-width:1000px; margin:auto;">
+    <section>
         <h2>About</h2>
-        <p>
-            VAYU Internal Library is a structured platform for managing SOPs,
-            Policies, Internal Documentation and Knowledge resources securely.
-        </p>
+        <p>Structured platform for managing SOPs and Policies securely.</p>
     </section>
 
-    <section style="padding:40px; background:#e2e8f0;">
-        <div style="max-width:1000px; margin:auto;">
-            <h2>Vision</h2>
-            <p>To build a centralized digital knowledge ecosystem.</p>
-
-            <h2>Mission</h2>
-            <p>Ensure secure, organized and accessible documentation system.</p>
-        </div>
+    <section>
+        <h2>Vision</h2>
+        <p>Build centralized digital knowledge ecosystem.</p>
     </section>
 
-    <section style="text-align:center; padding:50px;">
-        <button style="padding:15px 30px; margin:10px; font-size:16px;">SOP</button>
-        <button style="padding:15px 30px; margin:10px; font-size:16px;">Policy</button>
-        <button style="padding:15px 30px; margin:10px; font-size:16px;">Forms</button>
+    <section>
+        <h2>Mission</h2>
+        <p>Ensure secure and organized documentation system.</p>
     </section>
 
-    <section style="padding:40px; max-width:600px; margin:auto;">
-        <h2>Query / Suggestion</h2>
-        <input type="text" placeholder="Your Name" style="width:100%; padding:10px; margin-bottom:10px;">
-        <textarea placeholder="Your Message" style="width:100%; padding:10px; height:100px;"></textarea>
-        <button style="margin-top:10px; padding:10px 20px;">Submit</button>
+    <section style="text-align:center;">
+        <button>SOP</button>
+        <button>Policy</button>
+        <button>Forms</button>
     </section>
 
 </div>
 
 <script>
 function checkPassword(){
-    var pass = document.getElementById("password").value;
-    if(pass === "Vayu"){
+    var pass=document.getElementById("password").value;
+    if(pass==="Vayu"){
         document.getElementById("loginBox").style.display="none";
         document.getElementById("mainContent").style.display="block";
-    }
-    else{
-        alert("Access Denied");
+    }else{
+        alert("Wrong Password");
     }
 }
 </script>
