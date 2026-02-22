@@ -9,7 +9,6 @@
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:#0f172a;
 }
 
 /* LOGIN SCREEN */
@@ -55,8 +54,9 @@ button{
     border-radius:6px;
     color:#ff4d4d;
 }
-    <!-- LOADER -->
-  .loader{
+
+/* LOADER */
+.loader{
     display:none;
     position:fixed;
     width:100%;
@@ -79,10 +79,7 @@ button{
 @keyframes spin{
     0%{ transform:rotate(0deg); }
     100%{ transform:rotate(360deg); }
-}  
-<div id="loader" class="loader">
-    <div class="spinner"></div>
-</div>
+}
 
 /* MAIN WEBSITE */
 .main-content{
@@ -159,6 +156,11 @@ button{
     <p id="errorMsg"></p>
 </div>
 
+<!-- LOADER -->
+<div id="loader" class="loader">
+    <div class="spinner"></div>
+</div>
+
 <!-- MAIN WEBSITE -->
 <div class="main-content" id="mainContent">
 
@@ -196,6 +198,7 @@ window.onload = function(){
         document.getElementById("mainContent").style.display="block";
     }
 }
+
 function checkPassword(){
     var pass=document.getElementById("password").value;
     var error=document.getElementById("errorMsg");
@@ -216,7 +219,6 @@ function checkPassword(){
         error.innerHTML="Access Denied. Please contact VAYU Team for authorized access.";
     }
 }
-
 </script>
 
 </body>
