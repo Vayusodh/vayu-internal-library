@@ -33,6 +33,7 @@ input{
     border-radius:6px;
     border:none;
     margin-top:10px;
+    width:220px;
 }
 
 button{
@@ -43,6 +44,17 @@ button{
     background:#2563eb;
     color:white;
     cursor:pointer;
+}
+
+/* ERROR MESSAGE */
+#errorMsg{
+    margin-top:12px;
+    font-size:14px;
+    display:none;
+    background:rgba(255,0,0,0.1);
+    padding:8px 12px;
+    border-radius:6px;
+    color:#ff4d4d;
 }
 
 /* MAIN CONTENT */
@@ -63,12 +75,20 @@ section{
 
 <!-- LOGIN PAGE -->
 <div class="lock-container" id="loginBox">
-    <img src="logo.png" class="logo">
-    <h2>VAYU Internal Library</h2>
-    <input type="password" id="password" placeholder="Enter Password">
-    <button onclick="checkPassword()">Unlock</button>
-</div>
 
+    <img src="logo.png" class="logo">
+
+    <h2>VAYU Internal Library</h2>
+    <p style="opacity:0.8;">Secure Access Portal</p>
+
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="checkPassword()">Unlock</button>
+
+    <p id="errorMsg"></p>
+
+</div>
+    
 <!-- MAIN WEBSITE -->
 <div class="main-content" id="mainContent">
 
