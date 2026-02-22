@@ -114,6 +114,7 @@ button{
     margin-left:20px;
     text-decoration:none;
     font-weight:bold;
+    cursor:pointer;
 }
 
 /* HERO SECTION */
@@ -176,7 +177,7 @@ button{
             <a href="sop.html">SOP</a>
             <a href="#">Policy</a>
             <a href="#">Forms</a>
-            <a href="#">Contact</a>
+            <a onclick="logout()">Logout</a>
         </div>
     </div>
 
@@ -205,7 +206,6 @@ function checkPassword(){
 
     if(pass==="Vayu"){
         sessionStorage.setItem("accessGranted","yes");
-
         document.getElementById("loginBox").style.display="none";
         document.getElementById("loader").style.display="flex";
 
@@ -218,6 +218,12 @@ function checkPassword(){
         error.style.display="block";
         error.innerHTML="Access Denied. Please contact VAYU Team for authorized access.";
     }
+}
+
+function logout(){
+    sessionStorage.removeItem("accessGranted");
+    document.getElementById("mainContent").style.display="none";
+    document.getElementById("loginBox").style.display="flex";
 }
 </script>
 
