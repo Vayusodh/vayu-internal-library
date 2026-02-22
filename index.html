@@ -114,9 +114,31 @@ button{
     margin-left:20px;
     text-decoration:none;
     font-weight:bold;
-    cursor:pointer;
+    position:relative;
+    transition:0.3s;
 }
 
+.nav-links a:hover{
+    color:#ff3b3b;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    left:0;
+    bottom:-5px;
+    background:#ff3b3b;
+    transition:0.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+.logout-btn{
+    color:#ff3b3b !important;
+}
 /* HERO SECTION */
 .hero-section{
     height:100vh;
@@ -177,7 +199,7 @@ button{
             <a href="sop.html">SOP</a>
             <a href="#">Policy</a>
             <a href="#">Forms</a>
-            <a onclick="logout()">Logout</a>
+            <a onclick="logout()" class="logout-btn">Logout</a>
         </div>
     </div>
 
