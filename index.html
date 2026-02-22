@@ -10,7 +10,6 @@ body{
     margin:0;
     font-family:Arial, sans-serif;
     background:#0f172a;
-    color:white;
 }
 
 /* LOGIN SCREEN */
@@ -21,6 +20,7 @@ body{
     justify-content:center;
     align-items:center;
     background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
 }
 
 .logo{
@@ -46,7 +46,6 @@ button{
     cursor:pointer;
 }
 
-/* ERROR MESSAGE */
 #errorMsg{
     margin-top:12px;
     font-size:14px;
@@ -56,20 +55,90 @@ button{
     border-radius:6px;
     color:#ff4d4d;
 }
-<div id="loader" style="display:none; height:100vh; justify-content:center; align-items:center; background:#0f172a;">
-    <div class="spinner"></div>
+
+/* MAIN WEBSITE */
+.main-content{
+    display:none;
+}
+
+/* TOP BAR */
+.topbar{
+    background:#1e293b;
+    color:white;
+    padding:8px 20px;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#0f172a;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.nav-logo{
+    width:100px;
+}
+
+.nav-links a{
+    color:white;
+    margin-left:20px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* HERO SECTION */
+.hero-section{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('hero.jpg') center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+.hero-overlay h1{
+    font-size:50px;
+    margin:0;
+}
+
+.hero-overlay h2{
+    color:#ff3b3b;
+    margin:10px 0;
+}
+
+.hero-overlay p{
+    margin-top:10px;
+    font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+<div class="lock-container" id="loginBox">
+    <img src="logo.png" class="logo">
+    <h2>VAYU Internal Library</h2>
+    <p style="opacity:0.8;">Secure Access Portal</p>
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkPassword()">Unlock</button>
+    <p id="errorMsg"></p>
 </div>
-    
-/* MAIN CONTENT */
+
+<!-- MAIN WEBSITE -->
 <div class="main-content" id="mainContent">
 
-    <!-- TOP BAR -->
     <div class="topbar">
         <span>📞 +91 XXXXX XXXXX</span>
         <span>✉ library@vayu.com</span>
     </div>
 
-    <!-- NAVBAR -->
     <div class="navbar">
         <img src="logo.png" class="nav-logo">
         <div class="nav-links">
@@ -81,7 +150,6 @@ button{
         </div>
     </div>
 
-    <!-- HERO SECTION -->
     <section class="hero-section">
         <div class="hero-overlay">
             <h1>VAYU INTERNAL LIBRARY</h1>
@@ -92,77 +160,23 @@ button{
     </section>
 
 </div>
-section{
-    margin-bottom:40px;
-}
-</style>
-</head>
-
-<body>
-
-<!-- LOGIN PAGE -->
-<div class="lock-container" id="loginBox">
-
-    <img src="logo.png" class="logo">
-
-    <h2>VAYU Internal Library</h2>
-    <p style="opacity:0.8;">Secure Access Portal</p>
-
-    <input type="password" id="password" placeholder="Enter Password">
-
-    <button onclick="checkPassword()">Unlock</button>
-
-    <p id="errorMsg"></p>
-
-</div>
-    
-<!-- MAIN WEBSITE -->
-<div class="main-content" id="mainContent">
-
-    <section style="text-align:center;">
-        <h1>Welcome to VAYU Internal Library</h1>
-        <p>Centralized Document Control & Knowledge Hub</p>
-    </section>
-
-    <section>
-        <h2>About</h2>
-        <p>Structured platform for managing SOPs and Policies securely.</p>
-    </section>
-
-    <section>
-        <h2>Vision</h2>
-        <p>Build centralized digital knowledge ecosystem.</p>
-    </section>
-
-    <section>
-        <h2>Mission</h2>
-        <p>Ensure secure and organized documentation system.</p>
-    </section>
-
-    <section style="text-align:center;">
-        <button onclick="location.href='sop.html'">SOP</button>
-        <button onclick="location.href='policy.html'">POLICY</button>
-        <button onclick="location.href='forms.html'">FORM</button>
-    </section>
-
-</div>
 
 <script>
-
-       window.onload = function(){
+window.onload = function(){
     if(sessionStorage.getItem("accessGranted") === "yes"){
         document.getElementById("loginBox").style.display="none";
         document.getElementById("mainContent").style.display="block";
     }
 }
+
 function checkPassword(){
     var pass=document.getElementById("password").value;
     var error=document.getElementById("errorMsg");
 
     if(pass==="Vayu"){
-    sessionStorage.setItem("accessGranted","yes");
-    document.getElementById("loginBox").style.display="none";
-    document.getElementById("mainContent").style.display="block";
+        sessionStorage.setItem("accessGranted","yes");
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("mainContent").style.display="block";
     }else{
         error.style.display="block";
         error.innerHTML="Access Denied. Please contact VAYU Team for authorized access.";
