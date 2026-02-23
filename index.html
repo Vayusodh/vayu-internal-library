@@ -6,17 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Segoe UI, sans-serif;
-background:#0b1220;
-overflow-x:hidden;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Segoe UI;background:#0b1220;color:white;overflow-x:hidden;}
 
 /* LOGIN */
 .lock-container{
@@ -26,7 +17,6 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 background:linear-gradient(135deg,#0f172a,#1e293b);
-color:white;
 }
 
 .logo{width:130px;margin-bottom:20px;}
@@ -50,7 +40,6 @@ font-weight:bold;
 }
 
 button:hover{background:#0ea5e9;}
-
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
 
 /* NAVBAR */
@@ -63,14 +52,7 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
-color:white;
 z-index:1000;
-}
-
-.nav-left{
-display:flex;
-align-items:center;
-gap:20px;
 }
 
 .nav-logo{width:100px;}
@@ -78,22 +60,86 @@ gap:20px;
 .nav-right{
 display:flex;
 align-items:center;
-gap:25px;
+gap:20px;
 }
 
-.nav-right span{
-cursor:pointer;
+.nav-right span{cursor:pointer;}
+
+.logout-btn{color:#ff4d4d;font-weight:bold;cursor:pointer;}
+
+/* HERO */
+.hero{
+height:80vh;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url('hero.jpg') center/cover no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding-top:80px;
 }
 
-.logout-btn{
-color:#ff4d4d;
+.hero h1{font-size:45px;}
+.hero h2{color:#38bdf8;margin:10px 0;}
+
+/* MEDIA SLIDER */
+.news-media{
+margin-top:20px;
+width:100%;
+height:350px;
+overflow:hidden;
+position:relative;
+}
+
+.media-track{
+display:flex;
+width:400%;
+height:100%;
+animation:slideMedia 20s infinite;
+}
+
+.media-track img,
+.media-track video{
+width:100%;
+height:350px;
+object-fit:cover;
+}
+
+@keyframes slideMedia{
+0%,20%{transform:translateX(0);}
+25%,45%{transform:translateX(-100%);}
+50%,70%{transform:translateX(-200%);}
+75%,100%{transform:translateX(-300%);}
+}
+
+/* BUTTON SECTION */
+.library-links{
+padding:60px 20px;
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+background:#111827;
+}
+
+.lib-card{
+background:#1e293b;
+padding:40px;
+width:220px;
+text-align:center;
+border-radius:12px;
 cursor:pointer;
-font-weight:bold;
+transition:0.3s;
+}
+
+.lib-card:hover{
+background:#38bdf8;
+color:black;
 }
 
 /* SEARCH */
 .search-box{
-padding:80px 40px 20px 40px;
+padding:40px;
 text-align:center;
 background:#0b1220;
 }
@@ -106,30 +152,14 @@ border:none;
 }
 
 .search-results{
-color:white;
 margin-top:10px;
 }
-
-/* HERO */
-.hero{
-height:90vh;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-url('hero.jpg') center/cover no-repeat;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-padding-top:80px;
-}
-
-.hero h1{font-size:48px;}
-.hero h2{color:#38bdf8;margin:10px 0;}
 
 /* ABOUT */
 .about{
 padding:80px 60px;
 background:#f1f5f9;
+color:#333;
 text-align:center;
 }
 
@@ -139,54 +169,16 @@ text-align:center;
 max-width:1000px;
 margin:15px auto;
 line-height:1.8;
-color:#333;
 }
 
-/* NEWS MEDIA SLIDER */
-.news-media{
-position:relative;
-width:100%;
-height:350px;
-overflow:hidden;
-background:black;
-}
-
-.media-track{
-display:flex;
-width:400%;
-height:100%;
-animation:mediaSlide 20s infinite;
-}
-
-.media-track img,
-.media-track video{
-width:100%;
-height:350px;
-object-fit:cover;
-}
-
-@keyframes mediaSlide{
-0%{transform:translateX(0);}
-25%{transform:translateX(0);}
-30%{transform:translateX(-100%);}
-50%{transform:translateX(-100%);}
-55%{transform:translateX(-200%);}
-75%{transform:translateX(-200%);}
-80%{transform:translateX(-300%);}
-100%{transform:translateX(-300%);}
-}
-  
 /* FOOTER */
 .footer{
 background:#000;
-color:#ccc;
-padding:60px 40px;
+padding:60px;
 text-align:center;
 }
-
 .footer h3{color:#38bdf8;margin-bottom:20px;}
 .footer p{margin:6px 0;}
-
 </style>
 </head>
 
@@ -204,16 +196,10 @@ text-align:center;
 <div id="mainContent" style="display:none;">
 
 <div class="navbar">
-<div class="nav-left">
 <img src="logo.png" class="nav-logo">
-</div>
-
 <div class="nav-right">
 <span onclick="copyPhone()">📞 +91 9971 770 060</span>
-<span>|</span>
-<a href="mailto:discovery@vayusodh.com" style="color:white;text-decoration:none;">
-✉ discovery@vayusodh.com
-</a>
+<a href="mailto:discovery@vayusodh.com" style="color:white;text-decoration:none;">✉ discovery@vayusodh.com</a>
 <div onclick="logout()" class="logout-btn">Logout</div>
 </div>
 </div>
@@ -224,6 +210,23 @@ text-align:center;
 <h2>Emerging Technologies</h2>
 <p>Centralized Document Control & Secure Knowledge Hub</p>
 </div>
+</section>
+
+<section class="news-media">
+<div class="media-track">
+<img src="news1.jpg">
+<img src="news2.jpg">
+<video autoplay muted loop>
+<source src="newsvideo.mp4" type="video/mp4">
+</video>
+<img src="news3.jpg">
+</div>
+</section>
+
+<section class="library-links">
+<div class="lib-card" onclick="openSOP()">SOP</div>
+<div class="lib-card">Policy</div>
+<div class="lib-card">News</div>
 </section>
 
 <section class="search-box">
@@ -255,21 +258,6 @@ The common thread? The need for uncompromising quality and safety in handling cr
 </p>
 
 </section>
-  <section class="news-media">
-<div class="media-track">
-
-<img src="news1.jpg" alt="News 1">
-
-<img src="news2.jpg" alt="News 2">
-
-<video autoplay muted loop>
-<source src="newsvideo.mp4" type="video/mp4">
-</video>
-
-<img src="news3.jpg" alt="News 3">
-
-</div>
-</section>
 
 <footer class="footer">
 <h3>VAYUSODH APPLIED SYSTEMS & TECHNOLOGIES</h3>
@@ -294,7 +282,7 @@ sessionStorage.setItem("accessGranted","yes");
 document.getElementById("loginBox").style.display="none";
 document.getElementById("mainContent").style.display="block";
 }else{
-document.getElementById("errorMsg").innerHTML="Access Denied. Contact Vayusodh Team.";
+document.getElementById("errorMsg").innerHTML="Access Denied.";
 document.getElementById("errorMsg").style.display="block";
 }
 }
@@ -304,13 +292,15 @@ sessionStorage.clear();
 location.reload();
 }
 
-/* COPY PHONE */
 function copyPhone(){
 navigator.clipboard.writeText("+919971770060");
 alert("Phone number copied!");
 }
 
-/* SEARCH FUNCTION */
+function openSOP(){
+window.location.href="sop.html";
+}
+
 function searchContent(){
 var input=document.getElementById("searchInput").value.toLowerCase();
 var content=document.querySelector(".about").innerText.toLowerCase();
