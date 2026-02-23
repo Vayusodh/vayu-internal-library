@@ -7,7 +7,13 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Segoe UI;background:#0b1220;color:white;overflow-x:hidden;}
+body{
+font-family:Segoe UI;
+background:#0b1220;
+color:white;
+overflow-x:hidden;
+scroll-behavior:smooth;
+}
 
 /* LOGIN */
 .lock-container{
@@ -16,133 +22,218 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#0f172a,#1e293b);
+background:radial-gradient(circle at top,#1e3a8a,#0f172a);
+animation:fadeIn 1s ease;
 }
-.logo{width:130px;margin-bottom:20px;}
+.logo{width:140px;margin-bottom:20px;}
 
-input{
-padding:12px;border-radius:6px;border:none;margin-top:10px;width:250px;
+.login-input{
+padding:12px;
+border-radius:6px;
+border:none;
+margin-top:10px;
+width:260px;
+outline:none;
 }
-button{
-padding:12px 25px;margin-top:15px;border:none;border-radius:6px;
-background:#38bdf8;cursor:pointer;font-weight:bold;
+
+.login-btn{
+padding:12px 25px;
+margin-top:15px;
+border:none;
+border-radius:6px;
+background:#38bdf8;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
 }
-button:hover{background:#0ea5e9;}
+.login-btn:hover{
+background:#0ea5e9;
+transform:scale(1.05);
+}
+
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
 
 /* NAVBAR */
 .navbar{
-position:fixed;top:0;width:100%;
+position:fixed;
+top:0;
+width:100%;
 padding:15px 40px;
-display:flex;justify-content:space-between;align-items:center;
+display:flex;
+justify-content:space-between;
+align-items:center;
 background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
+box-shadow:0 0 20px rgba(0,0,0,0.6);
 z-index:1000;
 }
-.nav-logo{width:100px;}
-.nav-right{display:flex;align-items:center;gap:20px;}
-.nav-right span{cursor:pointer;}
-.logout-btn{color:#ff4d4d;font-weight:bold;cursor:pointer;}
+
+.nav-logo{width:110px;}
+
+.nav-right{
+display:flex;
+align-items:center;
+gap:25px;
+font-size:14px;
+}
+
+.nav-right span,
+.nav-right a{
+cursor:pointer;
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+.nav-right span:hover,
+.nav-right a:hover{
+color:#38bdf8;
+}
+
+.logout-btn{
+color:#ff4d4d;
+font-weight:bold;
+}
+.logout-btn:hover{
+color:white;
+}
 
 /* HERO */
 .hero{
-height:80vh;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
 url('hero.jpg') center/cover no-repeat;
-display:flex;justify-content:center;align-items:center;
-text-align:center;padding-top:80px;
-}
-.hero h1{font-size:45px;}
-.hero h2{color:#38bdf8;margin:10px 0;}
-
-/* MEDIA SLIDER */
-.news-media{
-margin-top:20px;width:100%;height:350px;overflow:hidden;position:relative;
-}
-.media-track{
-display:flex;width:400%;height:100%;
-animation:slideMedia 20s infinite;
-}
-.media-track img,
-.media-track video{
-width:100%;height:350px;object-fit:cover;
-}
-@keyframes slideMedia{
-0%,20%{transform:translateX(0);}
-25%,45%{transform:translateX(-100%);}
-50%,70%{transform:translateX(-200%);}
-75%,100%{transform:translateX(-300%);}
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding-top:80px;
 }
 
-/* BUTTON SECTION */
-.library-links{
-padding:60px 20px;display:flex;justify-content:center;
-gap:30px;flex-wrap:wrap;background:#111827;
+.hero h1{
+font-size:50px;
+animation:slideUp 1s ease;
 }
-.lib-card{
-background:#1e293b;padding:40px;width:220px;
-text-align:center;border-radius:12px;cursor:pointer;
-transition:0.3s;
+.hero h2{
+color:#38bdf8;
+margin:10px 0;
+animation:slideUp 1.2s ease;
 }
-.lib-card:hover{background:#38bdf8;color:black;}
-
-/* SEARCH */
-.search-box{
-padding:40px;text-align:center;background:#0b1220;
+.hero p{
+animation:slideUp 1.4s ease;
 }
-.search-box input{
-width:300px;padding:10px;border-radius:6px;border:none;
-}
-.search-results{margin-top:10px;}
 
 /* ABOUT */
 .about{
-padding:80px 60px;background:#f1f5f9;color:#333;text-align:center;
+padding:100px 60px;
+background:#f1f5f9;
+color:#333;
+text-align:center;
 }
-.about h2{margin-bottom:20px;}
+.about h2{
+margin-bottom:20px;
+color:#1e3a8a;
+}
 .about p{
-max-width:1000px;margin:15px auto;line-height:1.8;
+max-width:1000px;
+margin:15px auto;
+line-height:1.8;
 }
 
-/* CONCEPT SECTION */
+/* VISION SECTION */
 .concept-section{
-background:url('concept-bg.jpg') center/cover no-repeat;
+background:linear-gradient(to right,#0f172a,#1e3a8a);
 padding:100px 40px;
 }
-.concept-overlay{
-background:rgba(255,255,255,0.9);
-padding:60px 20px;
-}
 .concept-title{
-background:#6ba8c7;color:white;padding:15px 30px;
-font-size:22px;font-weight:bold;width:fit-content;
-margin:0 auto 60px auto;border-radius:5px;
+text-align:center;
+font-size:28px;
+margin-bottom:60px;
+color:#38bdf8;
 }
 .concept-container{
-display:flex;justify-content:center;gap:40px;flex-wrap:wrap;
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
 }
 .concept-card{
-width:320px;background:white;border-radius:180px;
-padding:50px 30px;text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
+width:300px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:50px 30px;
+border-radius:30px;
+text-align:center;
+transition:0.4s;
+border:1px solid rgba(255,255,255,0.2);
 }
-.concept-card h3{margin:20px 0 15px 0;color:#1e3a8a;}
-.concept-card p{font-size:14px;line-height:1.6;color:#444;}
-.concept-icon{
-width:80px;height:80px;background:#1e3a8a;
-border-radius:50%;display:flex;
-justify-content:center;align-items:center;
-color:white;font-size:28px;margin:0 auto;
+.concept-card:hover{
+transform:translateY(-15px);
+box-shadow:0 0 30px #38bdf8;
 }
-@media(max-width:900px){
-.concept-container{flex-direction:column;align-items:center;}
+.concept-card h3{
+margin:20px 0;
+color:#38bdf8;
 }
+
+/* SOP BUTTONS */
+.library-links{
+padding:80px 20px;
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+background:#111827;
+}
+.lib-card{
+background:#1e293b;
+padding:40px;
+width:240px;
+text-align:center;
+border-radius:15px;
+cursor:pointer;
+transition:0.4s;
+font-size:18px;
+}
+.lib-card:hover{
+background:#38bdf8;
+color:black;
+transform:scale(1.1);
+box-shadow:0 0 25px #38bdf8;
+}
+
+/* SEARCH */
+.search-box{
+padding:60px;
+text-align:center;
+background:#0b1220;
+}
+.search-box input{
+width:320px;
+padding:12px;
+border-radius:6px;
+border:none;
+outline:none;
+}
+.search-results{margin-top:10px;}
 
 /* FOOTER */
 .footer{
-background:#000;padding:60px;text-align:center;
+background:#000;
+padding:60px;
+text-align:center;
 }
 .footer h3{color:#38bdf8;margin-bottom:20px;}
-.footer p{margin:6px 0;}
+
+/* ANIMATIONS */
+@keyframes slideUp{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
 </style>
 </head>
 
@@ -152,8 +243,10 @@ background:#000;padding:60px;text-align:center;
 <div class="lock-container" id="loginBox">
 <img src="logo.png" class="logo">
 <h2>VAYU Secure Access Portal</h2>
-<input type="password" id="password" placeholder="Enter Password">
-<button onclick="checkPassword()">Unlock</button>
+
+<input type="password" id="password" class="login-input" placeholder="Enter Password">
+
+<button onclick="checkPassword()" class="login-btn">Login</button>
 <p id="errorMsg"></p>
 </div>
 
@@ -163,11 +256,12 @@ background:#000;padding:60px;text-align:center;
 <img src="logo.png" class="nav-logo">
 <div class="nav-right">
 <span onclick="copyPhone()">📞 +91 9971 770 060</span>
-<a href="mailto:discovery@vayusodh.com" style="color:white;text-decoration:none;">✉ discovery@vayusodh.com</a>
+<a href="mailto:discovery@vayusodh.com">✉ discovery@vayusodh.com</a>
 <div onclick="logout()" class="logout-btn">Logout</div>
 </div>
 </div>
 
+<!-- 1 HERO -->
 <section class="hero">
 <div>
 <h1>VAYU INTERNAL LIBRARY</h1>
@@ -176,79 +270,62 @@ background:#000;padding:60px;text-align:center;
 </div>
 </section>
 
-<section class="news-media">
-<div class="media-track">
-<img src="news1.jpg">
-<img src="news2.jpg">
-<video autoplay muted loop>
-<source src="newsvideo.mp4" type="video/mp4">
-</video>
-<img src="news3.jpg">
+<!-- 2 ABOUT -->
+<section class="about">
+<h2>About VAYU</h2>
+<p>VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed.</p>
+</section>
+
+<!-- 3 VISION -->
+<section class="concept-section">
+<div class="concept-title">Vision • Mission • Values</div>
+<div class="concept-container">
+<div class="concept-card">
+<h3>Vision</h3>
+<p>To lead globally in innovation-driven engineering excellence.</p>
+</div>
+<div class="concept-card">
+<h3>Mission</h3>
+<p>Delivering high-performance gas & chemical systems safely.</p>
+</div>
+<div class="concept-card">
+<h3>Values</h3>
+<p>Excellence • Innovation • Integrity • Customer Focus</p>
+</div>
 </div>
 </section>
 
+<!-- 4 SOP BUTTON -->
 <section class="library-links">
 <div class="lib-card" onclick="openSOP()">SOP</div>
 <div class="lib-card">Policy</div>
-<div class="lib-card">News</div>
 </section>
 
+<!-- 5 SEARCH -->
 <section class="search-box">
 <input type="text" id="searchInput" placeholder="Search content..." onkeyup="searchContent()">
 <div class="search-results" id="results"></div>
 </section>
 
-<section class="about">
-<h2>About VAYU</h2>
-<p>VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed. At VAYU, customer success stories pave the path for our growth.</p>
-<p>We're not just providing solutions; we're empowering our clients to innovate and thrive. Our specialized solutions ensure the highest quality and safety standards.</p>
-</section>
-
-<!-- VISION MISSION VALUES -->
-<section class="concept-section">
-<div class="concept-overlay">
-
-<div class="concept-title">The VAYU Concept</div>
-
-<div class="concept-container">
-
-<div class="concept-card">
-<div class="concept-icon">🔭</div>
-<h3>Vision</h3>
-<p>To lead as an integral player in the dynamic landscape of Hi-Tech Research and Manufacturing, pioneering advancements and reliability.</p>
-</div>
-
-<div class="concept-card">
-<div class="concept-icon">🏔</div>
-<h3>Mission</h3>
-<p>Supporting Semiconductor, Solar & Quantum sectors with quality-driven, innovation-focused and sustainable solutions.</p>
-</div>
-
-<div class="concept-card">
-<div class="concept-icon">💎</div>
-<h3>Values</h3>
-<p>Excellence • Innovation • Integrity • Customer-Centricity</p>
-</div>
-
-</div>
-</div>
-</section>
-
 <footer class="footer">
 <h3>VAYUSODH APPLIED SYSTEMS & TECHNOLOGIES</h3>
 <p># B5-Phase 2, Sector 88 Noida NCR India</p>
-<p>📞 +91 9971 770 060 | ✉ discovery@vayusodh.com</p>
 </footer>
 
 </div>
 
 <script>
+document.getElementById("password").addEventListener("keyup",function(event){
+if(event.key==="Enter"){checkPassword();}
+});
+
 window.onload=function(){
 if(sessionStorage.getItem("accessGranted")==="yes"){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("mainContent").style.display="block";
 }
 }
+
 function checkPassword(){
 var pass=document.getElementById("password").value;
 if(pass==="Vayu"){
@@ -260,8 +337,12 @@ document.getElementById("errorMsg").innerHTML="Access Denied.";
 document.getElementById("errorMsg").style.display="block";
 }
 }
+
 function logout(){sessionStorage.clear();location.reload();}
-function copyPhone(){navigator.clipboard.writeText("+919971770060");alert("Phone number copied!");}
+function copyPhone(){
+navigator.clipboard.writeText("+919971770060");
+alert("Phone number copied!");
+}
 function openSOP(){window.location.href="sop.html";}
 function searchContent(){
 var input=document.getElementById("searchInput").value.toLowerCase();
