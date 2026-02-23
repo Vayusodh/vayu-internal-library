@@ -92,22 +92,12 @@ button:hover{
     display:none;
 }
 
-/* TOP BAR */
-.topbar{
-    background:#1e293b;
-    color:white;
-    padding:8px 20px;
-    display:flex;
-    justify-content:space-between;
-    font-size:14px;
-}
-
 /* NAVBAR */
 .navbar{
     position:fixed;
     top:0;
     width:100%;
-    box-sizing:border-box; /* IMPORTANT */
+    box-sizing:border-box;
     padding:15px 40px;
     display:flex;
     justify-content:space-between;
@@ -134,13 +124,14 @@ button:hover{
 
 .logout-btn{
     color:#ff3b3b !important;
+    cursor:pointer;
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero-section{
     height:100vh;
     padding-top:80px;
-    background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('hero.jpg') center/cover no-repeat;
+    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('hero.jpg') center/cover no-repeat;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -162,7 +153,7 @@ button:hover{
     font-size:18px;
 }
 
-/* ABOUT SECTION */
+/* ABOUT */
 .about-section{
     padding:80px 60px;
     background:#f8fafc;
@@ -179,7 +170,45 @@ button:hover{
     max-width:1000px;
     margin:auto;
     line-height:1.8;
-    font-size:16px;
+}
+
+/* VISION & MISSION */
+.vm-section{
+    padding:80px 60px;
+    background:#ffffff;
+}
+
+.vm-container{
+    display:flex;
+    gap:40px;
+    max-width:1100px;
+    margin:auto;
+    flex-wrap:wrap;
+}
+
+.vm-box{
+    flex:1;
+    min-width:300px;
+    background:#f1f5f9;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+    transition:0.3s;
+}
+
+.vm-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+.vm-box h2{
+    margin-top:0;
+    color:#0f172a;
+}
+
+.vm-box p{
+    line-height:1.7;
+    color:#444;
 }
 </style>
 </head>
@@ -201,13 +230,8 @@ button:hover{
     <div class="spinner"></div>
 </div>
 
-<!-- MAIN -->
+<!-- MAIN WEBSITE -->
 <div class="main-content" id="mainContent">
-
-<div class="topbar">
-    <span>📞 +91 XXXXX XXXXX</span>
-    <span>✉ library@vayu.com</span>
-</div>
 
 <div class="navbar">
     <img src="logo.png" class="nav-logo">
@@ -232,24 +256,31 @@ button:hover{
     <h2>About VAYU</h2>
     <div class="about-content">
         <p>
-        VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed. At VAYU, customer success stories pave the path for our growth.
+        VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed.
         </p>
-
         <p>
-        We're not just providing solutions; we're empowering our clients to innovate and thrive. Our specialized solutions ensure the highest quality and safety standards, meeting the demands of businesses for secure gas and chemical handling systems.
+        We're empowering clients with secure gas and chemical handling systems ensuring highest safety standards.
         </p>
-
         <p>
-        Handling ultra-high purity gases and chemicals? We've got you covered with top-of-the-line equipment and safety measures, creating a secure environment for hazardous utilities.
+        From leak detection systems to AI-driven automation, safety and efficiency are our priorities across Semiconductor, Pharmaceuticals, Aerospace and more.
         </p>
+    </div>
+</section>
 
-        <p>
-        From leak detection systems to AI-driven automation, our approach prioritizes safety without compromising efficiency. Our solutions span across diverse industries including Electronics & Semiconductors, Pharmaceuticals, Aerospace, and more.
-        </p>
-
-        <p>
-        Join us in shaping a safer, more innovative future for industries worldwide.
-        </p>
+<section class="vm-section">
+    <div class="vm-container">
+        <div class="vm-box">
+            <h2>Our Vision</h2>
+            <p>
+            To lead as an integral player in Hi-Tech Research & Manufacturing, pioneering advancements in Semiconductor, Solar and Quantum technologies.
+            </p>
+        </div>
+        <div class="vm-box">
+            <h2>Our Mission</h2>
+            <p>
+            To deliver advanced, secure and innovation-driven engineering solutions ensuring quality, safety and sustainable industrial growth.
+            </p>
+        </div>
     </div>
 </section>
 
@@ -287,7 +318,7 @@ function checkPassword(){
 
 function logout(){
     sessionStorage.clear();
-    location.reload();  // full logout refresh
+    location.reload();
 }
 </script>
 
