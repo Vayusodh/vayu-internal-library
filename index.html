@@ -14,9 +14,8 @@ box-sizing:border-box;
 
 body{
 font-family:Segoe UI, sans-serif;
-overflow-x:hidden;
-scroll-behavior:smooth;
 background:#0b1220;
+overflow-x:hidden;
 }
 
 /* LOGIN */
@@ -29,68 +28,61 @@ align-items:center;
 background:linear-gradient(135deg,#0f172a,#1e293b);
 color:white;
 }
+
 .logo{width:130px;margin-bottom:20px;}
+
 input{
 padding:12px;
 border-radius:6px;
 border:none;
 margin-top:10px;
-width:230px;
+width:250px;
 }
+
 button{
-padding:12px 28px;
+padding:12px 25px;
 margin-top:15px;
 border:none;
 border-radius:6px;
 background:#38bdf8;
-color:black;
-font-weight:bold;
 cursor:pointer;
-transition:0.3s;
+font-weight:bold;
 }
-button:hover{background:#0ea5e9;}
-#errorMsg{margin-top:12px;color:#ff4d4d;display:none;}
 
-/* LOADER */
-.loader{
-display:none;
-position:fixed;
-width:100%;
-height:100vh;
-background:#0f172a;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-.spinner{
-width:70px;height:70px;
-border:8px solid #1e293b;
-border-top:8px solid #38bdf8;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+button:hover{background:#0ea5e9;}
+
+#errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
 
 /* NAVBAR */
 .navbar{
 position:fixed;
 top:0;
 width:100%;
-padding:15px 50px;
+padding:15px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
+color:white;
 z-index:1000;
 }
+
+.nav-left{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
 .nav-logo{width:100px;}
 
 .nav-right{
 display:flex;
 align-items:center;
 gap:25px;
-color:white;
-font-size:14px;
+}
+
+.nav-right span{
+cursor:pointer;
 }
 
 .logout-btn{
@@ -99,9 +91,28 @@ cursor:pointer;
 font-weight:bold;
 }
 
+/* SEARCH */
+.search-box{
+padding:80px 40px 20px 40px;
+text-align:center;
+background:#0b1220;
+}
+
+.search-box input{
+width:300px;
+padding:10px;
+border-radius:6px;
+border:none;
+}
+
+.search-results{
+color:white;
+margin-top:10px;
+}
+
 /* HERO */
 .hero{
-height:100vh;
+height:90vh;
 background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
 url('hero.jpg') center/cover no-repeat;
 display:flex;
@@ -111,9 +122,9 @@ text-align:center;
 color:white;
 padding-top:80px;
 }
-.hero h1{font-size:50px;}
+
+.hero h1{font-size:48px;}
 .hero h2{color:#38bdf8;margin:10px 0;}
-.hero p{margin-bottom:20px;}
 
 /* ABOUT */
 .about{
@@ -121,130 +132,27 @@ padding:80px 60px;
 background:#f1f5f9;
 text-align:center;
 }
+
 .about h2{margin-bottom:20px;}
+
 .about p{
-max-width:900px;
+max-width:1000px;
 margin:15px auto;
 line-height:1.8;
-}
-
-/* VISION MISSION */
-.vm-section{
-padding:80px 60px;
-background:linear-gradient(to right,#0f172a,#1e3a8a);
-color:white;
-}
-.vm-container{
-display:flex;
-gap:40px;
-flex-wrap:wrap;
-justify-content:center;
-}
-.vm-box{
-flex:1;
-min-width:300px;
-max-width:500px;
-padding:40px;
-border-radius:15px;
-background:rgba(255,255,255,0.05);
-border:2px solid rgba(56,189,248,0.5);
-box-shadow:0 0 20px rgba(56,189,248,0.3);
-transition:0.4s;
-}
-.vm-box:hover{
-transform:translateY(-8px);
-box-shadow:0 0 35px rgba(56,189,248,0.8);
-}
-.vm-box h2{color:#38bdf8;margin-bottom:10px;}
-
-/* SOP POLICY NEWS CARDS */
-.library-links{
-padding:80px 40px;
-background:#0b1220;
-display:flex;
-justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-}
-.lib-card{
-background:#1e293b;
-color:white;
-padding:40px;
-border-radius:15px;
-width:250px;
-text-align:center;
-transition:0.3s;
-cursor:pointer;
-position:relative;
-overflow:hidden;
-}
-
-/* SPARKLE EFFECT */
-.lib-card.sop::before{
-content:"";
-position:absolute;
-top:-50%;
-left:-50%;
-width:200%;
-height:200%;
-background:linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,0.8),
-transparent
-);
-transform:rotate(25deg);
-animation:spark 2s infinite;
-}
-@keyframes spark{
-0%{left:-100%;}
-100%{left:100%;}
-}
-
-.lib-card:hover{
-background:#38bdf8;
-color:black;
-}
-
-/* TV NEWS SCROLL */
-.news-tv{
-background:black;
-color:#38bdf8;
-overflow:hidden;
-white-space:nowrap;
-padding:15px 0;
-}
-.news-track{
-display:inline-block;
-padding-left:100%;
-animation:scrollNews 15s linear infinite;
-}
-.news-track span{
-margin-right:80px;
-font-weight:bold;
-}
-@keyframes scrollNews{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
+color:#333;
 }
 
 /* FOOTER */
 .footer{
 background:#000;
 color:#ccc;
-padding:70px 40px;
+padding:60px 40px;
 text-align:center;
 }
-.footer h3{
-color:#38bdf8;
-margin-bottom:20px;
-}
+
+.footer h3{color:#38bdf8;margin-bottom:20px;}
 .footer p{margin:6px 0;}
-.footer hr{
-width:60%;
-margin:25px auto;
-border:1px solid #333;
-}
+
 </style>
 </head>
 
@@ -253,25 +161,25 @@ border:1px solid #333;
 <!-- LOGIN -->
 <div class="lock-container" id="loginBox">
 <img src="logo.png" class="logo">
-<h2>Vayu Secure Access Portal</h2>
+<h2>VAYU Secure Access Portal</h2>
 <input type="password" id="password" placeholder="Enter Password">
 <button onclick="checkPassword()">Unlock</button>
 <p id="errorMsg"></p>
 </div>
 
-<!-- LOADER -->
-<div id="loader" class="loader">
-<div class="spinner"></div>
-</div>
-
-<!-- MAIN -->
 <div id="mainContent" style="display:none;">
 
 <div class="navbar">
+<div class="nav-left">
 <img src="logo.png" class="nav-logo">
+</div>
+
 <div class="nav-right">
-📞 +91 9971 770 060 |
+<span onclick="copyPhone()">📞 +91 9971 770 060</span>
+<span>|</span>
+<a href="mailto:discovery@vayusodh.com" style="color:white;text-decoration:none;">
 ✉ discovery@vayusodh.com
+</a>
 <div onclick="logout()" class="logout-btn">Logout</div>
 </div>
 </div>
@@ -284,43 +192,39 @@ border:1px solid #333;
 </div>
 </section>
 
+<section class="search-box">
+<input type="text" id="searchInput" placeholder="Search content..." onkeyup="searchContent()">
+<div class="search-results" id="results"></div>
+</section>
+
 <section class="about">
 <h2>About VAYU</h2>
-<p>Innovation-driven engineering solutions delivering safety & excellence.</p>
-</section>
 
-<section class="vm-section">
-<div class="vm-container">
-<div class="vm-box">
-<h2>Our Vision</h2>
-<p>Global leadership in innovation & safety-driven engineering.</p>
-</div>
-<div class="vm-box">
-<h2>Our Mission</h2>
-<p>Empowering industries with secure & high-performance solutions.</p>
-</div>
-</div>
-</section>
+<p>
+VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed. At VAYU, customer success stories pave the path for our growth.
+</p>
 
-<section class="library-links">
-<div class="lib-card sop" onclick="openSOP()">SOP</div>
-<div class="lib-card">Policy</div>
-<div class="lib-card">News</div>
-</section>
+<p>
+We're not just providing solutions; we're empowering our clients to innovate and thrive. Our specialized solutions ensure the highest quality and safety standards, meeting the demands of businesses for secure gas and chemical handling systems.
+</p>
 
-<section class="news-tv">
-<div class="news-track">
-<span>🔴 VAYU expanding Semiconductor operations</span>
-<span>⚡ AI Driven Gas Monitoring Systems Launched</span>
-<span>🚀 Cleanroom Automation Excellence</span>
-<span>🌍 Global Engineering Partnerships Announced</span>
-</div>
+<p>
+Handling ultra-high purity gases and chemicals? We've got you covered with top-of-the-line equipment and safety measures, creating a secure environment for hazardous utilities.
+</p>
+
+<p>
+From leak detection systems to AI-driven automation, our approach prioritizes safety without compromising on efficiency. Our solutions span across diverse industries including Electronics & Semiconductors, Pharmaceuticals, Aerospace, and more.
+</p>
+
+<p>
+The common thread? The need for uncompromising quality and safety in handling critical utilities. Join us in shaping a safer, more innovative future for industries worldwide.
+</p>
+
 </section>
 
 <footer class="footer">
 <h3>VAYUSODH APPLIED SYSTEMS & TECHNOLOGIES</h3>
 <p># B5-Phase 2, Sector 88 Noida NCR India</p>
-<hr>
 <p>📞 +91 9971 770 060 | ✉ discovery@vayusodh.com</p>
 </footer>
 
@@ -339,13 +243,9 @@ var pass=document.getElementById("password").value;
 if(pass==="Vayu"){
 sessionStorage.setItem("accessGranted","yes");
 document.getElementById("loginBox").style.display="none";
-document.getElementById("loader").style.display="flex";
-setTimeout(function(){
-document.getElementById("loader").style.display="none";
 document.getElementById("mainContent").style.display="block";
-},1200);
 }else{
-document.getElementById("errorMsg").innerHTML="Access Denied. Please contact Vayusodh Team";
+document.getElementById("errorMsg").innerHTML="Access Denied. Contact Vayusodh Team.";
 document.getElementById("errorMsg").style.display="block";
 }
 }
@@ -355,8 +255,28 @@ sessionStorage.clear();
 location.reload();
 }
 
-function openSOP(){
-window.location.href="sop.html";
+/* COPY PHONE */
+function copyPhone(){
+navigator.clipboard.writeText("+919971770060");
+alert("Phone number copied!");
+}
+
+/* SEARCH FUNCTION */
+function searchContent(){
+var input=document.getElementById("searchInput").value.toLowerCase();
+var content=document.querySelector(".about").innerText.toLowerCase();
+var result=document.getElementById("results");
+
+if(input.length<2){
+result.innerHTML="";
+return;
+}
+
+if(content.includes(input)){
+result.innerHTML="Result found in About section.";
+}else{
+result.innerHTML="No result found.";
+}
 }
 </script>
 
