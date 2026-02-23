@@ -202,6 +202,35 @@ transform:scale(1.1);
 box-shadow:0 0 25px #38bdf8;
 }
 
+  /* MEDIA SLIDER */
+.media-section{
+width:100%;
+height:350px;
+overflow:hidden;
+position:relative;
+}
+
+.media-wrapper{
+display:flex;
+width:400%;
+height:100%;
+animation:slideMedia 20s infinite;
+}
+
+.media-wrapper img,
+.media-wrapper video{
+width:100%;
+height:350px;
+object-fit:cover;
+}
+
+@keyframes slideMedia{
+0%,20%{transform:translateX(0);}
+25%,45%{transform:translateX(-100%);}
+50%,70%{transform:translateX(-200%);}
+75%,100%{transform:translateX(-300%);}
+}
+  
 /* SEARCH */
 .search-box{
 padding:60px;
@@ -217,6 +246,34 @@ outline:none;
 }
 .search-results{margin-top:10px;}
 
+  /* NEWS TV BAR */
+.news-bar{
+background:black;
+overflow:hidden;
+white-space:nowrap;
+position:relative;
+border-top:3px solid #38bdf8;
+border-bottom:3px solid #38bdf8;
+}
+
+.news-track{
+display:inline-block;
+padding-left:100%;
+animation:scrollNews 18s linear infinite;
+}
+
+.news-track span{
+display:inline-block;
+margin-right:80px;
+font-weight:bold;
+color:#38bdf8;
+font-size:16px;
+}
+
+@keyframes scrollNews{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
 /* FOOTER */
 .footer{
 background:#000;
@@ -233,6 +290,58 @@ to{opacity:1;transform:translateY(0);}
 @keyframes fadeIn{
 from{opacity:0;}
 to{opacity:1;}
+}
+
+  /* BUTTON SECTION */
+.library-links{
+padding:80px 20px;
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+background:#111827;
+}
+
+/* ICE FREEZE EFFECT BUTTON */
+.lib-card{
+background:#1e293b;
+padding:40px;
+width:240px;
+text-align:center;
+border-radius:15px;
+cursor:pointer;
+transition:0.4s;
+position:relative;
+overflow:hidden;
+font-size:18px;
+}
+
+/* ICE SWIPE SHINE */
+.lib-card::after{
+content:'';
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.6),
+transparent
+);
+transition:0.6s;
+}
+
+.lib-card:hover::after{
+left:100%;
+}
+
+.lib-card:hover{
+transform:scale(1.1);
+box-shadow:0 0 30px #38bdf8;
+color:black;
+background:#38bdf8;
 }
 </style>
 </head>
@@ -299,14 +408,35 @@ to{opacity:1;}
 <section class="library-links">
 <div class="lib-card" onclick="openSOP()">SOP</div>
 <div class="lib-card">Policy</div>
+<div class="lib-card">Form</div>
 </section>
 
+<section class="media-section">
+<div class="media-wrapper">
+<img src="news1.jpg">
+<img src="news2.jpg">
+<video autoplay muted loop>
+<source src="newsvideo.mp4" type="video/mp4">
+</video>
+<img src="news3.jpg">
+</div>
+</section>
+  
 <!-- 5 SEARCH -->
 <section class="search-box">
 <input type="text" id="searchInput" placeholder="Search content..." onkeyup="searchContent()">
 <div class="search-results" id="results"></div>
 </section>
 
+<section class="news-bar">
+<div class="news-track">
+<span>⚡ AI Driven Gas Monitoring Systems</span>
+<span>🌞 Solar Utility Expansion 2026</span>
+<span>🔬 Semiconductor Cleanroom Innovation</span>
+<span>🌬 Advanced Chemical Handling Solutions</span>
+</div>
+</section>
+  
 <footer class="footer">
 <h3>VAYUSODH APPLIED SYSTEMS & TECHNOLOGIES</h3>
 <p># B5-Phase 2, Sector 88 Noida NCR India</p>
