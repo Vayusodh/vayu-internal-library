@@ -1,37 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SOP Section - VAYU</title>
-<meta charset="UTF-8">
+<title>VAYU SOP Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-    font-family:Arial, sans-serif;
-    margin:0;
-    padding:40px;
-    background:#f1f5f9;
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
 }
 
-h1{
-    font-size:40px;
+.header{
+padding:25px;
+text-align:center;
+background:linear-gradient(90deg,#0ea5e9,#1e3a8a);
+font-size:24px;
+font-weight:bold;
 }
 
-a{
-    color:#2563eb;
-    text-decoration:none;
-    font-weight:bold;
+.sop-container{
+padding:50px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.sop-card{
+background:rgba(255,255,255,0.05);
+padding:30px;
+border-radius:15px;
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.2);
+transition:0.4s;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+}
+
+.sop-card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px #38bdf8;
+}
+
+.sop-title{
+font-size:18px;
+margin-bottom:15px;
+color:#38bdf8;
+}
+
+.preview-btn{
+margin-top:15px;
+padding:8px 15px;
+background:#38bdf8;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+iframe{
+width:100%;
+height:600px;
+border:none;
+margin-top:20px;
+border-radius:12px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>SOP Section</h1>
-<p>All Standard Operating Procedures will be listed here.</p>
+<div class="header">
+VAYU Standard Operating Procedures
+</div>
 
-<br><br>
-<a href="index.html">← Back to Home</a>
+<div class="sop-container">
+
+<div class="sop-card">
+<div class="sop-title">Oribital welding SOP</div>
+<button class="preview-btn" onclick="previewPDF('sample.pdf')">Preview</button>
+</div>
+    
+<div class="sop-card">
+<div class="sop-title">Gas Handling SOP</div>
+<button class="preview-btn" onclick="previewPDF('sample.pdf')">Preview</button>
+</div>
+
+<div class="sop-card">
+<div class="sop-title">Chemical Safety SOP</div>
+<button class="preview-btn" onclick="previewPDF('sample.pdf')">Preview</button>
+</div>
+</div>
+
+<div id="pdfViewer"></div>
+
+<script>
+function previewPDF(file){
+document.getElementById("pdfViewer").innerHTML =
+'<iframe src="'+file+'"></iframe>';
+}
+</script>
 
 </body>
 </html>
