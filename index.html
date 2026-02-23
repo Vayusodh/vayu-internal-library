@@ -8,11 +8,12 @@
 <style>
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Segoe UI, sans-serif;
     scroll-behavior:smooth;
+    background:#0b1220;
 }
 
-/* LOGIN SCREEN */
+/* LOGIN */
 .lock-container{
     height:100vh;
     display:flex;
@@ -22,194 +23,99 @@ body{
     background:linear-gradient(135deg,#0f172a,#1e293b);
     color:white;
 }
-
-.logo{
-    width:120px;
-    margin-bottom:20px;
-}
-
+.logo{width:130px;margin-bottom:20px;}
 input{
-    padding:12px;
-    border-radius:6px;
-    border:none;
-    margin-top:10px;
-    width:220px;
+    padding:12px;border-radius:6px;border:none;margin-top:10px;width:230px;
 }
-
 button{
-    padding:12px 25px;
-    margin-top:15px;
-    border:none;
-    border-radius:6px;
-    background:#2563eb;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
+    padding:12px 28px;margin-top:15px;border:none;border-radius:6px;
+    background:#2563eb;color:white;cursor:pointer;transition:0.3s;
 }
-
-button:hover{
-    background:#1d4ed8;
-}
-
-#errorMsg{
-    margin-top:12px;
-    font-size:14px;
-    display:none;
-    background:rgba(255,0,0,0.1);
-    padding:8px 12px;
-    border-radius:6px;
-    color:#ff4d4d;
-}
+button:hover{background:#1d4ed8;}
+#errorMsg{margin-top:12px;font-size:14px;display:none;color:#ff4d4d;}
 
 /* LOADER */
 .loader{
-    display:none;
-    position:fixed;
-    width:100%;
-    height:100vh;
-    background:#0f172a;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+    display:none;position:fixed;width:100%;height:100vh;
+    background:#0f172a;justify-content:center;align-items:center;z-index:9999;
 }
-
 .spinner{
-    width:70px;
-    height:70px;
-    border:8px solid #1e293b;
-    border-top:8px solid #ff3b3b;
-    border-radius:50%;
+    width:70px;height:70px;border:8px solid #1e293b;
+    border-top:8px solid #38bdf8;border-radius:50%;
     animation:spin 1s linear infinite;
 }
-
-@keyframes spin{
-    0%{ transform:rotate(0deg); }
-    100%{ transform:rotate(360deg); }
-}
-
-/* MAIN WEBSITE */
-.main-content{
-    display:none;
-}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
 /* NAVBAR */
 .navbar{
-    position:fixed;
-    top:0;
-    width:100%;
-    box-sizing:border-box;
-    padding:15px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(15,23,42,0.9);
-    z-index:1000;
+    position:fixed;top:0;width:100%;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:15px 50px;background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(8px);z-index:1000;
 }
-
-.nav-logo{
-    width:100px;
-}
-
-.nav-links a{
-    color:white;
-    margin-left:20px;
-    text-decoration:none;
-    font-weight:bold;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    color:#ff3b3b;
-}
-
+.nav-logo{width:110px;}
+.nav-info{color:#38bdf8;font-size:14px;}
 .logout-btn{
-    color:#ff3b3b !important;
-    cursor:pointer;
+    color:#ff4d4d;cursor:pointer;font-weight:bold;
 }
 
 /* HERO */
-.hero-section{
+.hero{
     height:100vh;
-    padding-top:80px;
-    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('hero.jpg') center/cover no-repeat;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
+    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)),
+    url('hero.jpg') center/cover no-repeat;
+    display:flex;justify-content:center;align-items:center;
+    text-align:center;color:white;padding-top:70px;
 }
-
-.hero-overlay h1{
-    font-size:50px;
-    margin:0;
-}
-
-.hero-overlay h2{
-    color:#ff3b3b;
-    margin:10px 0;
-}
-
-.hero-overlay p{
-    font-size:18px;
-}
+.hero h1{font-size:55px;margin:0;}
+.hero h2{color:#38bdf8;margin:10px 0;}
+.hero p{font-size:18px;margin-bottom:25px;}
+.hero button{background:#38bdf8;color:#000;font-weight:bold;}
+.hero button:hover{background:#0ea5e9;}
 
 /* ABOUT */
-.about-section{
-    padding:80px 60px;
-    background:#f8fafc;
-    color:#111;
+.about{
+    padding:90px 60px;
+    background:#f1f5f9;color:#111;text-align:center;
 }
-
-.about-section h2{
-    text-align:center;
-    font-size:32px;
-    margin-bottom:30px;
-}
-
-.about-content{
-    max-width:1000px;
-    margin:auto;
+.about h2{font-size:32px;margin-bottom:25px;}
+.about p{
+    max-width:1000px;margin:auto 0 20px auto;
     line-height:1.8;
 }
 
-/* VISION & MISSION */
+/* VISION MISSION WATER/WIND THEME */
 .vm-section{
-    padding:80px 60px;
-    background:#ffffff;
+    padding:90px 60px;
+    background:linear-gradient(to right,#0f172a,#1e3a8a);
+    color:white;
 }
-
 .vm-container{
-    display:flex;
-    gap:40px;
-    max-width:1100px;
-    margin:auto;
-    flex-wrap:wrap;
+    display:flex;gap:40px;flex-wrap:wrap;justify-content:center;
 }
-
 .vm-box{
-    flex:1;
-    min-width:300px;
-    background:#f1f5f9;
-    padding:40px;
-    border-radius:10px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.05);
-    transition:0.3s;
+    flex:1;min-width:300px;max-width:500px;
+    padding:40px;border-radius:15px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    border:2px solid rgba(56,189,248,0.5);
+    box-shadow:0 0 25px rgba(56,189,248,0.3);
+    transition:0.4s;
 }
-
 .vm-box:hover{
+    box-shadow:0 0 40px rgba(56,189,248,0.8);
     transform:translateY(-8px);
-    box-shadow:0 15px 35px rgba(0,0,0,0.08);
 }
+.vm-box h2{color:#38bdf8;margin-top:0;}
 
-.vm-box h2{
-    margin-top:0;
-    color:#0f172a;
+/* FOOTER */
+.footer{
+    background:#0b1220;color:#ccc;
+    padding:60px 40px;text-align:center;
 }
-
-.vm-box p{
-    line-height:1.7;
-    color:#444;
-}
+.footer h3{color:#38bdf8;}
+.footer p{margin:6px 0;}
+.footer hr{margin:30px auto;width:60%;border:1px solid #333;}
 </style>
 </head>
 
@@ -218,8 +124,7 @@ button:hover{
 <!-- LOGIN -->
 <div class="lock-container" id="loginBox">
     <img src="logo.png" class="logo">
-    <h2>VAYU Internal Library</h2>
-    <p>Secure Access Portal</p>
+    <h2>Secure Access Portal</h2>
     <input type="password" id="password" placeholder="Enter Password">
     <button onclick="checkPassword()">Unlock</button>
     <p id="errorMsg"></p>
@@ -230,95 +135,98 @@ button:hover{
     <div class="spinner"></div>
 </div>
 
-<!-- MAIN WEBSITE -->
-<div class="main-content" id="mainContent">
+<!-- MAIN -->
+<div id="mainContent" style="display:none;">
 
 <div class="navbar">
     <img src="logo.png" class="nav-logo">
-    <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#about">About</a>
-        <a href="sop.html">SOP</a>
-        <a onclick="logout()" class="logout-btn">Logout</a>
+    <div class="nav-info">
+        📞 +91 9971 770 060 &nbsp; | &nbsp; ✉ discovery@vayusodh.com
     </div>
+    <div onclick="logout()" class="logout-btn">Logout</div>
 </div>
 
-<section class="hero-section">
-    <div class="hero-overlay">
+<section class="hero">
+    <div>
         <h1>VAYU INTERNAL LIBRARY</h1>
         <h2>Emerging Technologies</h2>
         <p>Centralized Document Control & Secure Knowledge Hub</p>
-        <button onclick="location.href='sop.html'">Enter Library</button>
+        <button onclick="document.getElementById('about').scrollIntoView();">
+            Enter Library
+        </button>
     </div>
 </section>
 
-<section class="about-section" id="about">
-    <h2>About VAYU</h2>
-    <div class="about-content">
-        <p>
-        VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed.
-        </p>
-        <p>
-        We're empowering clients with secure gas and chemical handling systems ensuring highest safety standards.
-        </p>
-        <p>
-        From leak detection systems to AI-driven automation, safety and efficiency are our priorities across Semiconductor, Pharmaceuticals, Aerospace and more.
-        </p>
-    </div>
+<section class="about" id="about">
+<h2>About VAYU</h2>
+<p>
+VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing how projects are designed and executed.
+</p>
+<p>
+Our specialized solutions ensure the highest quality and safety standards for secure gas and chemical handling systems.
+</p>
+<p>
+From leak detection systems to AI-driven automation, we serve Semiconductor, Pharmaceuticals, Aerospace and other critical industries.
+</p>
 </section>
 
 <section class="vm-section">
-    <div class="vm-container">
-        <div class="vm-box">
-            <h2>Our Vision</h2>
-            <p>
-            To lead as an integral player in Hi-Tech Research & Manufacturing, pioneering advancements in Semiconductor, Solar and Quantum technologies.
-            </p>
-        </div>
-        <div class="vm-box">
-            <h2>Our Mission</h2>
-            <p>
-            To deliver advanced, secure and innovation-driven engineering solutions ensuring quality, safety and sustainable industrial growth.
-            </p>
-        </div>
-    </div>
+<div class="vm-container">
+
+<div class="vm-box">
+<h2>Our Vision</h2>
+<p>
+To lead as a pioneer in Semiconductor, Solar and Quantum technologies, delivering reliability, safety and innovation-driven excellence worldwide.
+</p>
+</div>
+
+<div class="vm-box">
+<h2>Our Mission</h2>
+<p>
+To empower industries with advanced, secure and high-performance engineering solutions ensuring uncompromising quality and sustainable growth.
+</p>
+</div>
+
+</div>
 </section>
+
+<footer class="footer">
+<h3>VAYUSODH APPLIED SYSTEMS & TECHNOLOGIES</h3>
+<p># B5-Phase 2, Sector 88 Noida NCR India</p>
+<p>India</p>
+<hr>
+<p>📞 +91 9971 770 060 | ✉ discovery@vayusodh.com</p>
+</footer>
 
 </div>
 
 <script>
-window.onload = function(){
-    document.getElementById("loader").style.display="none";
-
-    if(sessionStorage.getItem("accessGranted") === "yes"){
-        document.getElementById("loginBox").style.display="none";
-        document.getElementById("mainContent").style.display="block";
-    }
+window.onload=function(){
+if(sessionStorage.getItem("accessGranted")==="yes"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("mainContent").style.display="block";
+}
 }
 
 function checkPassword(){
-    var pass=document.getElementById("password").value;
-    var error=document.getElementById("errorMsg");
-
-    if(pass==="Vayu"){
-        sessionStorage.setItem("accessGranted","yes");
-        document.getElementById("loginBox").style.display="none";
-        document.getElementById("loader").style.display="flex";
-
-        setTimeout(function(){
-            document.getElementById("loader").style.display="none";
-            document.getElementById("mainContent").style.display="block";
-        },1200);
-
-    }else{
-        error.style.display="block";
-        error.innerHTML="Access Denied. Please contact VAYU Team for authorized access.";
-    }
+var pass=document.getElementById("password").value;
+if(pass==="Vayu"){
+sessionStorage.setItem("accessGranted","yes");
+document.getElementById("loginBox").style.display="none";
+document.getElementById("loader").style.display="flex";
+setTimeout(function(){
+document.getElementById("loader").style.display="none";
+document.getElementById("mainContent").style.display="block";
+},1200);
+}else{
+document.getElementById("errorMsg").innerHTML="Access Denied.";
+document.getElementById("errorMsg").style.display="block";
+}
 }
 
 function logout(){
-    sessionStorage.clear();
-    location.reload();
+sessionStorage.clear();
+location.reload();
 }
 </script>
 
