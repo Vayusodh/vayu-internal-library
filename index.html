@@ -232,7 +232,7 @@ button:hover{background:#0ea5e9;}
 <!-- LOGIN -->
 <div class="lock-container" id="loginBox">
     <img src="logo.png" class="logo">
-    <h2>Secure Access Portal</h2>
+    <h2>Vayu Secure Access Portal</h2>
     <input type="password" id="password" placeholder="Enter Password">
     <button onclick="checkPassword()">Unlock</button>
     <p id="errorMsg"></p>
@@ -248,7 +248,7 @@ button:hover{background:#0ea5e9;}
 
 <div class="navbar">
     <img src="logo.png" class="nav-logo">
-    <div class="nav-center">
+    <div class="nav-left corner">
         📞 +91 9971 770 060 &nbsp; | &nbsp; ✉ discovery@vayusodh.com
     </div>
     <div onclick="logout()" class="logout-btn">Logout</div>
@@ -329,7 +329,7 @@ document.getElementById("loader").style.display="none";
 document.getElementById("mainContent").style.display="block";
 },1200);
 }else{
-document.getElementById("errorMsg").innerHTML="Access Denied";
+document.getElementById("errorMsg").innerHTML="Access Denied plase contact Vayu Team";
 document.getElementById("errorMsg").style.display="block";
 }
 }
