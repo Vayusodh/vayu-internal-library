@@ -7,106 +7,109 @@
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    font-family:Segoe UI, sans-serif;
-    overflow-x:hidden;
-    scroll-behavior:smooth;
-    background:#0b1220;
+font-family:Segoe UI, sans-serif;
+overflow-x:hidden;
+scroll-behavior:smooth;
+background:#0b1220;
 }
 
 /* LOGIN */
 .lock-container{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
-    color:white;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
 }
 .logo{width:130px;margin-bottom:20px;}
 input{
-    padding:12px;
-    border-radius:6px;
-    border:none;
-    margin-top:10px;
-    width:230px;
+padding:12px;
+border-radius:6px;
+border:none;
+margin-top:10px;
+width:230px;
 }
 button{
-    padding:12px 28px;
-    margin-top:15px;
-    border:none;
-    border-radius:6px;
-    background:#38bdf8;
-    color:black;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
+padding:12px 28px;
+margin-top:15px;
+border:none;
+border-radius:6px;
+background:#38bdf8;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 button:hover{background:#0ea5e9;}
 #errorMsg{margin-top:12px;color:#ff4d4d;display:none;}
 
 /* LOADER */
 .loader{
-    display:none;
-    position:fixed;
-    width:100%;
-    height:100vh;
-    background:#0f172a;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+display:none;
+position:fixed;
+width:100%;
+height:100vh;
+background:#0f172a;
+justify-content:center;
+align-items:center;
+z-index:9999;
 }
 .spinner{
-    width:70px;height:70px;
-    border:8px solid #1e293b;
-    border-top:8px solid #38bdf8;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
+width:70px;height:70px;
+border:8px solid #1e293b;
+border-top:8px solid #38bdf8;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
 @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
 /* NAVBAR */
 .navbar{
-    position:fixed;
-    top:0;
-    width:100%;
-    box-sizing:border-box;
-    padding:15px 50px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,0.85);
-    backdrop-filter:(8px);
-    z-index:1000;
+position:fixed;
+top:0;
+width:100%;
+padding:15px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
+z-index:1000;
 }
 .nav-logo{width:100px;}
-.nav-center{
-    color:#38bdf8;
-    font-size:14px;
+
+.nav-right{
+display:flex;
+align-items:center;
+gap:25px;
+color:white;
+font-size:14px;
 }
+
 .logout-btn{
-    color:#ff4d4d;
-    cursor:pointer;
-    font-weight:bold;
+color:#ff4d4d;
+cursor:pointer;
+font-weight:bold;
 }
 
 /* HERO */
 .hero{
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-    url('hero.jpg') center/cover no-repeat;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-    padding-top:80px;
+height:100vh;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url('hero.jpg') center/cover no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding-top:80px;
 }
 .hero h1{font-size:50px;}
 .hero h2{color:#38bdf8;margin:10px 0;}
@@ -114,115 +117,133 @@ button:hover{background:#0ea5e9;}
 
 /* ABOUT */
 .about{
-    padding:80px 60px;
-    background:#f1f5f9;
-    text-align:center;
+padding:80px 60px;
+background:#f1f5f9;
+text-align:center;
 }
 .about h2{margin-bottom:20px;}
 .about p{
-    max-width:900px;
-    margin:15px auto;
-    line-height:1.8;
+max-width:900px;
+margin:15px auto;
+line-height:1.8;
 }
 
 /* VISION MISSION */
 .vm-section{
-    padding:80px 60px;
-    background:linear-gradient(to right,#0f172a,#1e3a8a);
-    color:white;
+padding:80px 60px;
+background:linear-gradient(to right,#0f172a,#1e3a8a);
+color:white;
 }
 .vm-container{
-    display:flex;
-    gap:40px;
-    flex-wrap:wrap;
-    justify-content:center;
+display:flex;
+gap:40px;
+flex-wrap:wrap;
+justify-content:center;
 }
 .vm-box{
-    flex:1;
-    min-width:300px;
-    max-width:500px;
-    padding:40px;
-    border-radius:15px;
-    background:rgba(255,255,255,0.05);
-    border:2px solid rgba(56,189,248,0.5);
-    box-shadow:0 0 20px rgba(56,189,248,0.3);
-    transition:0.4s;
+flex:1;
+min-width:300px;
+max-width:500px;
+padding:40px;
+border-radius:15px;
+background:rgba(255,255,255,0.05);
+border:2px solid rgba(56,189,248,0.5);
+box-shadow:0 0 20px rgba(56,189,248,0.3);
+transition:0.4s;
 }
 .vm-box:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 35px rgba(56,189,248,0.8);
+transform:translateY(-8px);
+box-shadow:0 0 35px rgba(56,189,248,0.8);
 }
 .vm-box h2{color:#38bdf8;margin-bottom:10px;}
 
-/* SOP POLICY NEWS */
+/* SOP POLICY NEWS CARDS */
 .library-links{
-    padding:80px 40px;
-    background:#0b1220;
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    flex-wrap:wrap;
+padding:80px 40px;
+background:#0b1220;
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
 }
 .lib-card{
-    background:#1e293b;
-    color:white;
-    padding:40px;
-    border-radius:15px;
-    width:250px;
-    text-align:center;
-    transition:0.3s;
-    cursor:pointer;
-}
-.lib-card:hover{
-    background:#38bdf8;
-    color:black;
+background:#1e293b;
+color:white;
+padding:40px;
+border-radius:15px;
+width:250px;
+text-align:center;
+transition:0.3s;
+cursor:pointer;
+position:relative;
+overflow:hidden;
 }
 
-/* VERTICAL ADS */
-.ads-section{
-    background:#111827;
-    padding:60px 0;
-    overflow:hidden;
+/* SPARKLE EFFECT */
+.lib-card.sop::before{
+content:"";
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.8),
+transparent
+);
+transform:rotate(25deg);
+animation:spark 2s infinite;
 }
-.ads-scroll{
-    height:200px;
-    overflow:hidden;
-    position:relative;
+@keyframes spark{
+0%{left:-100%;}
+100%{left:100%;}
 }
-.ads-track{
-    display:flex;
-    flex-direction:column;
-    animation:scrollAds 10s linear infinite;
+
+.lib-card:hover{
+background:#38bdf8;
+color:black;
 }
-.ads-track div{
-    color:#38bdf8;
-    text-align:center;
-    padding:20px;
-    font-size:18px;
+
+/* TV NEWS SCROLL */
+.news-tv{
+background:black;
+color:#38bdf8;
+overflow:hidden;
+white-space:nowrap;
+padding:15px 0;
 }
-@keyframes scrollAds{
-    0%{transform:translateY(0);}
-    100%{transform:translateY(-100%);}
+.news-track{
+display:inline-block;
+padding-left:100%;
+animation:scrollNews 15s linear infinite;
+}
+.news-track span{
+margin-right:80px;
+font-weight:bold;
+}
+@keyframes scrollNews{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
 }
 
 /* FOOTER */
 .footer{
-    background:#000;
-    color:#ccc;
-    padding:70px 40px;
-    text-align:center;
+background:#000;
+color:#ccc;
+padding:70px 40px;
+text-align:center;
 }
 .footer h3{
-    color:#38bdf8;
-    margin-bottom:20px;
+color:#38bdf8;
+margin-bottom:20px;
 }
-.footer p{
-    margin:6px 0;
-}
+.footer p{margin:6px 0;}
 .footer hr{
-    width:60%;
-    margin:25px auto;
-    border:1px solid #333;
+width:60%;
+margin:25px auto;
+border:1px solid #333;
 }
 </style>
 </head>
@@ -231,72 +252,68 @@ button:hover{background:#0ea5e9;}
 
 <!-- LOGIN -->
 <div class="lock-container" id="loginBox">
-    <img src="logo.png" class="logo">
-    <h2>Vayu Secure Access Portal</h2>
-    <input type="password" id="password" placeholder="Enter Password">
-    <button onclick="checkPassword()">Unlock</button>
-    <p id="errorMsg"></p>
+<img src="logo.png" class="logo">
+<h2>Vayu Secure Access Portal</h2>
+<input type="password" id="password" placeholder="Enter Password">
+<button onclick="checkPassword()">Unlock</button>
+<p id="errorMsg"></p>
 </div>
 
 <!-- LOADER -->
 <div id="loader" class="loader">
-    <div class="spinner"></div>
+<div class="spinner"></div>
 </div>
 
 <!-- MAIN -->
 <div id="mainContent" style="display:none;">
 
 <div class="navbar">
-    <img src="logo.png" class="nav-logo">
-    <div class="nav-centre">
-        📞 +91 9971 770 060 &nbsp; | &nbsp; ✉ discovery@vayusodh.com
-    </div>
-    <div onclick="logout()" class="logout-btn">Logout</div>
+<img src="logo.png" class="nav-logo">
+<div class="nav-right">
+📞 +91 9971 770 060 |
+✉ discovery@vayusodh.com
+<div onclick="logout()" class="logout-btn">Logout</div>
+</div>
 </div>
 
 <section class="hero">
-    <div>
-        <h1>VAYU INTERNAL LIBRARY</h1>
-        <h2>Emerging Technologies</h2>
-        <p>Centralized Document Control & Secure Knowledge Hub</p>
-    </div>
+<div>
+<h1>VAYU INTERNAL LIBRARY</h1>
+<h2>Emerging Technologies</h2>
+<p>Centralized Document Control & Secure Knowledge Hub</p>
+</div>
 </section>
 
 <section class="about">
-    <h2>About VAYU</h2>
-    <p>VAYU – A journey fueled by innovation and advanced engineering excellence.</p>
-    <p>We deliver high-quality gas & chemical handling systems for critical industries.</p>
-    <p>Serving Semiconductor, Pharma, Aerospace & more with uncompromising safety.</p>
+<h2>About VAYU</h2>
+<p>Innovation-driven engineering solutions delivering safety & excellence.</p>
 </section>
 
 <section class="vm-section">
 <div class="vm-container">
 <div class="vm-box">
 <h2>Our Vision</h2>
-<p>To lead globally in innovation-driven engineering solutions ensuring safety and quality.</p>
+<p>Global leadership in innovation & safety-driven engineering.</p>
 </div>
 <div class="vm-box">
 <h2>Our Mission</h2>
-<p>To empower industries with secure, reliable and high-performance solutions.</p>
+<p>Empowering industries with secure & high-performance solutions.</p>
 </div>
 </div>
 </section>
 
 <section class="library-links">
-<div class="lib-card">SOP</div>
+<div class="lib-card sop" onclick="openSOP()">SOP</div>
 <div class="lib-card">Policy</div>
 <div class="lib-card">News</div>
 </section>
 
-<section class="ads-section">
-<div class="ads-scroll">
-<div class="ads-track">
-<div>🌊 VAYU – Innovating Fluid & Gas Systems</div>
-<div>🚀 Trusted by Semiconductor Leaders</div>
-<div>🔬 Precision Engineering Excellence</div>
-<div>🛡 Safety First – Always</div>
-<div>🌍 Serving Industries Worldwide</div>
-</div>
+<section class="news-tv">
+<div class="news-track">
+<span>🔴 VAYU expanding Semiconductor operations</span>
+<span>⚡ AI Driven Gas Monitoring Systems Launched</span>
+<span>🚀 Cleanroom Automation Excellence</span>
+<span>🌍 Global Engineering Partnerships Announced</span>
 </div>
 </section>
 
@@ -328,7 +345,7 @@ document.getElementById("loader").style.display="none";
 document.getElementById("mainContent").style.display="block";
 },1200);
 }else{
-document.getElementById("errorMsg").innerHTML="Access Denied.please contact Vayusodh Team";
+document.getElementById("errorMsg").innerHTML="Access Denied. Please contact Vayusodh Team";
 document.getElementById("errorMsg").style.display="block";
 }
 }
@@ -336,6 +353,10 @@ document.getElementById("errorMsg").style.display="block";
 function logout(){
 sessionStorage.clear();
 location.reload();
+}
+
+function openSOP(){
+window.location.href="sop.html";
 }
 </script>
 
