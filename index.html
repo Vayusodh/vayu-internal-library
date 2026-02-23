@@ -18,53 +18,29 @@ justify-content:center;
 align-items:center;
 background:linear-gradient(135deg,#0f172a,#1e293b);
 }
-
 .logo{width:130px;margin-bottom:20px;}
 
 input{
-padding:12px;
-border-radius:6px;
-border:none;
-margin-top:10px;
-width:250px;
+padding:12px;border-radius:6px;border:none;margin-top:10px;width:250px;
 }
-
 button{
-padding:12px 25px;
-margin-top:15px;
-border:none;
-border-radius:6px;
-background:#38bdf8;
-cursor:pointer;
-font-weight:bold;
+padding:12px 25px;margin-top:15px;border:none;border-radius:6px;
+background:#38bdf8;cursor:pointer;font-weight:bold;
 }
-
 button:hover{background:#0ea5e9;}
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
 
 /* NAVBAR */
 .navbar{
-position:fixed;
-top:0;
-width:100%;
+position:fixed;top:0;width:100%;
 padding:15px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+display:flex;justify-content:space-between;align-items:center;
 background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
 z-index:1000;
 }
-
 .nav-logo{width:100px;}
-
-.nav-right{
-display:flex;
-align-items:center;
-gap:20px;
-}
-
+.nav-right{display:flex;align-items:center;gap:20px;}
 .nav-right span{cursor:pointer;}
-
 .logout-btn{color:#ff4d4d;font-weight:bold;cursor:pointer;}
 
 /* HERO */
@@ -72,39 +48,24 @@ gap:20px;
 height:80vh;
 background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
 url('hero.jpg') center/cover no-repeat;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding-top:80px;
+display:flex;justify-content:center;align-items:center;
+text-align:center;padding-top:80px;
 }
-
 .hero h1{font-size:45px;}
 .hero h2{color:#38bdf8;margin:10px 0;}
 
 /* MEDIA SLIDER */
 .news-media{
-margin-top:20px;
-width:100%;
-height:350px;
-overflow:hidden;
-position:relative;
+margin-top:20px;width:100%;height:350px;overflow:hidden;position:relative;
 }
-
 .media-track{
-display:flex;
-width:400%;
-height:100%;
+display:flex;width:400%;height:100%;
 animation:slideMedia 20s infinite;
 }
-
 .media-track img,
 .media-track video{
-width:100%;
-height:350px;
-object-fit:cover;
+width:100%;height:350px;object-fit:cover;
 }
-
 @keyframes slideMedia{
 0%,20%{transform:translateX(0);}
 25%,45%{transform:translateX(-100%);}
@@ -114,68 +75,71 @@ object-fit:cover;
 
 /* BUTTON SECTION */
 .library-links{
-padding:60px 20px;
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
-background:#111827;
+padding:60px 20px;display:flex;justify-content:center;
+gap:30px;flex-wrap:wrap;background:#111827;
 }
-
 .lib-card{
-background:#1e293b;
-padding:40px;
-width:220px;
-text-align:center;
-border-radius:12px;
-cursor:pointer;
+background:#1e293b;padding:40px;width:220px;
+text-align:center;border-radius:12px;cursor:pointer;
 transition:0.3s;
 }
-
-.lib-card:hover{
-background:#38bdf8;
-color:black;
-}
+.lib-card:hover{background:#38bdf8;color:black;}
 
 /* SEARCH */
 .search-box{
-padding:40px;
-text-align:center;
-background:#0b1220;
+padding:40px;text-align:center;background:#0b1220;
 }
-
 .search-box input{
-width:300px;
-padding:10px;
-border-radius:6px;
-border:none;
+width:300px;padding:10px;border-radius:6px;border:none;
 }
-
-.search-results{
-margin-top:10px;
-}
+.search-results{margin-top:10px;}
 
 /* ABOUT */
 .about{
-padding:80px 60px;
-background:#f1f5f9;
-color:#333;
-text-align:center;
+padding:80px 60px;background:#f1f5f9;color:#333;text-align:center;
+}
+.about h2{margin-bottom:20px;}
+.about p{
+max-width:1000px;margin:15px auto;line-height:1.8;
 }
 
-.about h2{margin-bottom:20px;}
-
-.about p{
-max-width:1000px;
-margin:15px auto;
-line-height:1.8;
+/* CONCEPT SECTION */
+.concept-section{
+background:url('concept-bg.jpg') center/cover no-repeat;
+padding:100px 40px;
+}
+.concept-overlay{
+background:rgba(255,255,255,0.9);
+padding:60px 20px;
+}
+.concept-title{
+background:#6ba8c7;color:white;padding:15px 30px;
+font-size:22px;font-weight:bold;width:fit-content;
+margin:0 auto 60px auto;border-radius:5px;
+}
+.concept-container{
+display:flex;justify-content:center;gap:40px;flex-wrap:wrap;
+}
+.concept-card{
+width:320px;background:white;border-radius:180px;
+padding:50px 30px;text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+.concept-card h3{margin:20px 0 15px 0;color:#1e3a8a;}
+.concept-card p{font-size:14px;line-height:1.6;color:#444;}
+.concept-icon{
+width:80px;height:80px;background:#1e3a8a;
+border-radius:50%;display:flex;
+justify-content:center;align-items:center;
+color:white;font-size:28px;margin:0 auto;
+}
+@media(max-width:900px){
+.concept-container{flex-direction:column;align-items:center;}
 }
 
 /* FOOTER */
 .footer{
-background:#000;
-padding:60px;
-text-align:center;
+background:#000;padding:60px;text-align:center;
 }
 .footer h3{color:#38bdf8;margin-bottom:20px;}
 .footer p{margin:6px 0;}
@@ -236,27 +200,38 @@ text-align:center;
 
 <section class="about">
 <h2>About VAYU</h2>
+<p>VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed. At VAYU, customer success stories pave the path for our growth.</p>
+<p>We're not just providing solutions; we're empowering our clients to innovate and thrive. Our specialized solutions ensure the highest quality and safety standards.</p>
+</section>
 
-<p>
-VAYU – A journey fueled by innovation! From groundbreaking products to cutting-edge engineering solutions, we're revolutionizing the way projects are designed and executed. At VAYU, customer success stories pave the path for our growth.
-</p>
+<!-- VISION MISSION VALUES -->
+<section class="concept-section">
+<div class="concept-overlay">
 
-<p>
-We're not just providing solutions; we're empowering our clients to innovate and thrive. Our specialized solutions ensure the highest quality and safety standards, meeting the demands of businesses for secure gas and chemical handling systems.
-</p>
+<div class="concept-title">The VAYU Concept</div>
 
-<p>
-Handling ultra-high purity gases and chemicals? We've got you covered with top-of-the-line equipment and safety measures, creating a secure environment for hazardous utilities.
-</p>
+<div class="concept-container">
 
-<p>
-From leak detection systems to AI-driven automation, our approach prioritizes safety without compromising on efficiency. Our solutions span across diverse industries including Electronics & Semiconductors, Pharmaceuticals, Aerospace, and more.
-</p>
+<div class="concept-card">
+<div class="concept-icon">🔭</div>
+<h3>Vision</h3>
+<p>To lead as an integral player in the dynamic landscape of Hi-Tech Research and Manufacturing, pioneering advancements and reliability.</p>
+</div>
 
-<p>
-The common thread? The need for uncompromising quality and safety in handling critical utilities. Join us in shaping a safer, more innovative future for industries worldwide.
-</p>
+<div class="concept-card">
+<div class="concept-icon">🏔</div>
+<h3>Mission</h3>
+<p>Supporting Semiconductor, Solar & Quantum sectors with quality-driven, innovation-focused and sustainable solutions.</p>
+</div>
 
+<div class="concept-card">
+<div class="concept-icon">💎</div>
+<h3>Values</h3>
+<p>Excellence • Innovation • Integrity • Customer-Centricity</p>
+</div>
+
+</div>
+</div>
 </section>
 
 <footer class="footer">
@@ -274,7 +249,6 @@ document.getElementById("loginBox").style.display="none";
 document.getElementById("mainContent").style.display="block";
 }
 }
-
 function checkPassword(){
 var pass=document.getElementById("password").value;
 if(pass==="Vayu"){
@@ -286,36 +260,16 @@ document.getElementById("errorMsg").innerHTML="Access Denied.";
 document.getElementById("errorMsg").style.display="block";
 }
 }
-
-function logout(){
-sessionStorage.clear();
-location.reload();
-}
-
-function copyPhone(){
-navigator.clipboard.writeText("+919971770060");
-alert("Phone number copied!");
-}
-
-function openSOP(){
-window.location.href="sop.html";
-}
-
+function logout(){sessionStorage.clear();location.reload();}
+function copyPhone(){navigator.clipboard.writeText("+919971770060");alert("Phone number copied!");}
+function openSOP(){window.location.href="sop.html";}
 function searchContent(){
 var input=document.getElementById("searchInput").value.toLowerCase();
 var content=document.querySelector(".about").innerText.toLowerCase();
 var result=document.getElementById("results");
-
-if(input.length<2){
-result.innerHTML="";
-return;
-}
-
-if(content.includes(input)){
-result.innerHTML="Result found in About section.";
-}else{
-result.innerHTML="No result found.";
-}
+if(input.length<2){result.innerHTML="";return;}
+if(content.includes(input)){result.innerHTML="Result found in About section.";}
+else{result.innerHTML="No result found.";}
 }
 </script>
 
