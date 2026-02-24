@@ -2,104 +2,173 @@
 <html>
 <head>
 <title>VAYU SOP Dashboard</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
 margin:0;
 font-family:Segoe UI;
-background:linear-gradient(135deg,#0f172a,#1e293b);
+background:#0b1220;
 color:white;
 }
 
-.header{
-padding:25px;
-text-align:center;
-background:linear-gradient(90deg,#0ea5e9,#1e3a8a);
-font-size:24px;
+/* NAVBAR */
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
+}
+
+.nav-logo{width:110px;}
+
+.back-btn{
+background:#38bdf8;
+padding:8px 15px;
+border-radius:5px;
+cursor:pointer;
+color:black;
 font-weight:bold;
 }
 
-.sop-container{
-padding:50px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-}
-
-.sop-card{
-background:rgba(255,255,255,0.05);
-padding:30px;
-border-radius:15px;
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,0.2);
-transition:0.4s;
-cursor:pointer;
-position:relative;
-overflow:hidden;
-}
-
-.sop-card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px #38bdf8;
-}
-
-.sop-title{
-font-size:18px;
-margin-bottom:15px;
+/* TITLE */
+.page-title{
+margin-top:120px;
+text-align:center;
+font-size:32px;
 color:#38bdf8;
 }
 
-.preview-btn{
-margin-top:15px;
-padding:8px 15px;
-background:#38bdf8;
-border:none;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
+/* SEARCH */
+.search-box{
+text-align:center;
+margin:30px 0;
 }
 
-iframe{
-width:100%;
-height:600px;
+.search-box input{
+padding:10px;
+width:300px;
+border-radius:6px;
 border:none;
-margin-top:20px;
-border-radius:12px;
+}
+
+/* SOP GRID */
+.sop-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+padding:40px;
+}
+
+.sop-card{
+background:#1e293b;
+padding:30px;
+border-radius:15px;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sop-card:hover{
+background:#38bdf8;
+color:black;
+transform:scale(1.05);
+}
+
+/* PDF VIEWER */
+#pdfViewer{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+}
+
+#pdfViewer iframe{
+width:80%;
+height:80%;
+}
+
+.close-btn{
+position:absolute;
+top:20px;
+right:40px;
+font-size:20px;
+cursor:pointer;
+color:white;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-VAYU Standard Operating Procedures
+<div class="navbar">
+<img src="logo.png" class="nav-logo">
+<div class="back-btn" onclick="goHome()">⬅ Back</div>
 </div>
 
-<div class="sop-container">
-
-<div class="sop-card">
-<div class="sop-title">Oribital welding SOP</div>
-<button class="preview-btn" onclick="previewPDF('sample.pdf')">Preview</button>
-</div>
-    
-<div class="sop-card">
-<div class="sop-title">Gas Handling SOP</div>
-<button class="preview-btn" onclick="previewPDF('sample.pdf')">Preview</button>
+<div class="page-title">
+Standard Operating Procedures
 </div>
 
-<div class="sop-card">
-<div class="sop-title">Chemical Safety SOP</div>
-<button class="preview-btn" onclick="previewPDF('sample.pdf')">Preview</button>
-</div>
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search SOP..." onkeyup="searchSOP()">
 </div>
 
-<div id="pdfViewer"></div>
+<div class="sop-container" id="sopContainer">
+
+<div class="sop-card" onclick="openPDF('sop1.pdf')">
+Gas Handling SOP
+</div>
+
+<div class="sop-card" onclick="openPDF('sop2.pdf')">
+Cleanroom Protocol SOP
+</div>
+
+<div class="sop-card" onclick="openPDF('sop3.pdf')">
+Chemical Safety SOP
+</div>
+
+</div>
+
+<!-- PDF VIEWER -->
+<div id="pdfViewer">
+<div class="close-btn" onclick="closePDF()">✖ Close</div>
+<iframe id="pdfFrame"></iframe>
+</div>
 
 <script>
-function previewPDF(file){
-document.getElementById("pdfViewer").innerHTML =
-'<iframe src="'+file+'"></iframe>';
+function goHome(){
+window.location.href="index.html";
+}
+
+function openPDF(file){
+document.getElementById("pdfViewer").style.display="flex";
+document.getElementById("pdfFrame").src=file;
+}
+
+function closePDF(){
+document.getElementById("pdfViewer").style.display="none";
+document.getElementById("pdfFrame").src="";
+}
+
+function searchSOP(){
+let input=document.getElementById("searchInput").value.toLowerCase();
+let cards=document.getElementsByClassName("sop-card");
+
+for(let i=0;i<cards.length;i++){
+let text=cards[i].innerText.toLowerCase();
+cards[i].style.display=text.includes(input) ? "block" : "none";
+}
 }
 </script>
 
