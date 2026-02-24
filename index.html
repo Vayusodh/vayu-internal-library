@@ -248,6 +248,19 @@ background:#000;padding:60px;text-align:center;
 <p id="errorMsg"></p>
 </div>
 
+  <div class="mechanical-loader" id="gearLoader">
+    <div class="turbine">
+        <div class="blade"></div>
+        <div class="blade"></div>
+        <div class="blade"></div>
+        <div class="blade"></div>
+        <div class="blade"></div>
+        <div class="blade"></div>
+        <div class="core"></div>
+    </div>
+    <div class="loader-text">INITIALIZING SYSTEM...</div>
+</div>
+  
 <div id="mainContent" style="display:none;">
 
 <div class="navbar">
@@ -335,13 +348,25 @@ window.onload=function(){
 if(sessionStorage.getItem("accessGranted")==="yes"){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("mainContent").style.display="block";
+document.getElementById("gearLoader").style.display="none";
 }
 }
 function checkPassword(){
 if(document.getElementById("password").value==="Vayu"){
-sessionStorage.setItem("accessGranted","yes");
+
+// Hide lock screen
 document.getElementById("loginBox").style.display="none";
+
+// Show gear animation
+document.getElementById("gearLoader").style.display="flex";
+
+// After 4 seconds show home
+setTimeout(function(){
+sessionStorage.setItem("accessGranted","yes");
+document.getElementById("gearLoader").style.display="none";
 document.getElementById("mainContent").style.display="block";
+},4000);
+
 }else{
 document.getElementById("errorMsg").innerHTML="Access Denied. Contact Vayu Team.";
 document.getElementById("errorMsg").style.display="block";
