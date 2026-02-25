@@ -172,6 +172,47 @@ transition:0.4s;
 .about-container{flex-direction:column;}
 }
 
+
+@media(max-width:768px){
+.navbar{
+padding:12px 14px;
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
+.nav-logo{width:92px;}
+.nav-right{
+width:100%;
+gap:10px;
+font-size:12px;
+flex-wrap:wrap;
+}
+.hero{padding:120px 16px 30px;}
+.hero h1{font-size:32px;line-height:1.15;}
+.hero h2{font-size:20px;}
+.hero p{font-size:14px;}
+.library-links{padding:50px 16px;gap:14px;}
+.lib-card{width:calc(50% - 10px);padding:26px 14px;font-size:16px;}
+.media-section{padding:24px 12px 10px;margin-bottom:-10px;}
+.media-wrapper{height:min(58vw,280px);border-radius:16px;}
+.media-admin{gap:10px;margin-top:12px;}
+.media-admin button{padding:10px 14px;font-size:12px;}
+.search-box{padding:36px 14px;}
+.search-box input{width:100%;max-width:360px;}
+.footer{padding:40px 20px;}
+}
+
+@media(max-width:480px){
+.about{padding:80px 6%;}
+.about-text,.about-image{min-width:0;}
+.concept-section{padding:70px 18px;}
+.concept-card{width:100%;max-width:330px;padding:36px 20px;}
+.lib-card{width:100%;}
+.media-wrapper{height:220px;}
+.media-admin button{flex:1 1 calc(50% - 10px);}
+.news-track span{margin-right:40px;font-size:13px;}
+}
+
 /* VISION */
 .concept-section{
 background:linear-gradient(to right,#0f172a,#1e3a8a);
