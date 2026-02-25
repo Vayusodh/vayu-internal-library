@@ -230,46 +230,58 @@ background:#38bdf8;color:black;
 }
 
 /* MEDIA */
-.media-section{width:100%;height:350px;overflow:hidden;}
-/* NEW INDIVIDUAL SLIDER */
 
-.media-section{
-position:relative;
-width:100%;
-height:350px;
-overflow:hidden;
-}
-
+padding:40px 20px;
+background:#0b1220;
+  }
 .media-wrapper{
 position:relative;
-width:100%;
-height:100%;
+max-width:1100px;
+height:350px;
+margin:0 auto;
+overflow:hidden;
+border-radius:20px;
+border:2px solid rgba(56,189,248,0.45);
+box-shadow:0 14px 40px rgba(2,6,23,0.7);
+background:#020617;
 }
-
 .media-wrapper img{
 position:absolute;
+inset:0;
 width:100%;
-height:350px;
+height:100%;
 object-fit:cover;
 opacity:0;
-animation:fadeSlide 25s infinite;
+transform:scale(1.03);
+transition:opacity 0.9s ease,transform 0.9s ease;
 }
-
-/* Each image delay */
-.media-wrapper span:nth-child(1) img{animation-delay:0s;}
-.media-wrapper span:nth-child(2) img{animation-delay:5s;}
-.media-wrapper span:nth-child(3) img{animation-delay:10s;}
-.media-wrapper span:nth-child(4) img{animation-delay:15s;}
-.media-wrapper span:nth-child(5) img{animation-delay:20s;}
-
-@keyframes fadeSlide{
-0%{opacity:0;}
-5%{opacity:1;}
-15%{opacity:1;}
-20%{opacity:0;}
-100%{opacity:0;}
+.media-wrapper img.active{
+opacity:1;
+transform:scale(1);
 }
-
+.media-wrapper.compress-mode img{
+object-fit:contain;
+background:#020617;
+}
+.media-admin{
+max-width:1100px;
+margin:16px auto 0;
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+}
+.media-admin button{
+padding:10px 16px;
+border:none;
+border-radius:8px;
+font-weight:700;
+cursor:pointer;
+background:#1e293b;
+color:#e2e8f0;
+}
+.media-admin button:hover{background:#38bdf8;color:#020617;}
+  
 /* SEARCH */
 .search-box{
 padding:60px;text-align:center;background:#0b1220;
@@ -388,12 +400,18 @@ background:#000;padding:60px;text-align:center;
 </section>
 
 <section class="media-section">
-<div class="media-wrapper">
-<span><img src="news1.jpeg"></span>
-<span><img src="news2.jpeg"></span>
-<span><img src="news3.jpeg"></span>
-<span><img src="news4.jpeg"></span>
-<span><img src="news5.JPG"></span>
+<div class="media-wrapper" id="mediaWrapper">
+<img src="news1.jpeg" alt="VAYU highlight 1" class="active">
+<img src="news2.jpeg" alt="VAYU highlight 2">
+<img src="news3.jpeg" alt="VAYU highlight 3">
+<img src="news4.jpeg" alt="VAYU highlight 4">
+<img src="news5.JPG" alt="VAYU highlight 5">
+</div>
+<div class="media-admin">
+<button type="button" onclick="prevSlide()">◀ Prev</button>
+<button type="button" id="pauseBtn" onclick="toggleAutoplay()">⏸ Pause Auto</button>
+<button type="button" onclick="nextSlide()">Next ▶</button>
+<button type="button" id="fitBtn" onclick="toggleCompressMode()">🗜 Compress View</button>
 </div>
 </section>
 
@@ -467,7 +485,59 @@ result.innerHTML="✔ Result found in About section.";
 result.innerHTML="✖ No result found.";
 }
 }
-</script>
 
+var slides=Array.from(document.querySelectorAll("#mediaWrapper img"));
+var currentSlide=0;
+var isAutoplay=true;
+var slideTimer;
+function showSlide(index){
+slides.forEach(function(slide,i){
+slide.classList.toggle("active",i===index);
+});
+currentSlide=index;
+}
+function nextSlide(){
+showSlide((currentSlide+1)%slides.length);
+restartAutoplay();
+}
+function prevSlide(){
+showSlide((currentSlide-1+slides.length)%slides.length);
+restartAutoplay();
+}
+function startAutoplay(){
+slideTimer=setInterval(function(){
+showSlide((currentSlide+1)%slides.length);
+},5000);
+}
+function stopAutoplay(){
+clearInterval(slideTimer);
+}
+function restartAutoplay(){
+if(isAutoplay){
+stopAutoplay();
+startAutoplay();
+}
+}
+function toggleAutoplay(){
+var button=document.getElementById("pauseBtn");
+isAutoplay=!isAutoplay;
+if(isAutoplay){
+button.innerHTML="⏸ Pause Auto";
+startAutoplay();
+}else{
+button.innerHTML="▶ Resume Auto";
+stopAutoplay();
+}
+}
+function toggleCompressMode(){
+var wrapper=document.getElementById("mediaWrapper");
+var button=document.getElementById("fitBtn");
+var compress=wrapper.classList.toggle("compress-mode");
+button.innerHTML=compress?"🖼 Cover View":"🗜 Compress View";
+}
+startAutoplay();
+
+</script>
+  
 </body>
 </html>
