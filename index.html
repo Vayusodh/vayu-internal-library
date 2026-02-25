@@ -56,6 +56,60 @@ cursor:pointer;font-weight:bold;transition:0.3s;
 .login-btn:hover{background:#0ea5e9;transform:scale(1.05);}
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
 
+/* LOADER */
+.mechanical-loader{
+display:none;
+position:fixed;
+inset:0;
+background:radial-gradient(circle at center,#0f172a,#020617);
+justify-content:center;
+align-items:center;
+flex-direction:column;
+gap:20px;
+z-index:2000;
+}
+.turbine{
+position:relative;
+width:140px;
+height:140px;
+animation:spin 2s linear infinite;
+}
+.blade{
+position:absolute;
+top:50%;
+left:50%;
+width:14px;
+height:56px;
+border-radius:999px;
+background:linear-gradient(to top,#0ea5e9,#38bdf8,#bae6fd);
+transform-origin:50% 0;
+}
+.blade:nth-child(1){transform:translate(-50%,-50%) rotate(0deg);}
+.blade:nth-child(2){transform:translate(-50%,-50%) rotate(60deg);}
+.blade:nth-child(3){transform:translate(-50%,-50%) rotate(120deg);}
+.blade:nth-child(4){transform:translate(-50%,-50%) rotate(180deg);}
+.blade:nth-child(5){transform:translate(-50%,-50%) rotate(240deg);}
+.blade:nth-child(6){transform:translate(-50%,-50%) rotate(300deg);}
+.core{
+position:absolute;
+top:50%;
+left:50%;
+width:34px;
+height:34px;
+transform:translate(-50%,-50%);
+border-radius:50%;
+background:#e2e8f0;
+box-shadow:0 0 18px rgba(56,189,248,0.8);
+}
+.loader-text{
+font-weight:700;
+letter-spacing:1px;
+color:#38bdf8;
+animation:pulse 1.2s ease-in-out infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
+
 /* NAVBAR */
 .navbar{
 position:fixed;top:0;width:100%;
@@ -198,17 +252,15 @@ width:100%;
 height:350px;
 object-fit:cover;
 opacity:0;
-animation:fadeSlide 35s infinite;
+animation:fadeSlide 25s infinite;
 }
 
 /* Each image delay */
-.media-wrapper img:nth-child(1){animation-delay:0s;}
-.media-wrapper img:nth-child(2){animation-delay:5s;}
-.media-wrapper img:nth-child(3){animation-delay:10s;}
-.media-wrapper img:nth-child(4){animation-delay:15s;}
-.media-wrapper img:nth-child(5){animation-delay:20s;}
-.media-wrapper img:nth-child(6){animation-delay:25s;}
-.media-wrapper img:nth-child(7){animation-delay:30s;}
+.media-wrapper span:nth-child(1) img{animation-delay:0s;}
+.media-wrapper span:nth-child(2) img{animation-delay:5s;}
+.media-wrapper span:nth-child(3) img{animation-delay:10s;}
+.media-wrapper span:nth-child(4) img{animation-delay:15s;}
+.media-wrapper span:nth-child(5) img{animation-delay:20s;}
 
 @keyframes fadeSlide{
 0%{opacity:0;}
