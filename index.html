@@ -119,15 +119,23 @@ background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
 box-shadow:0 0 20px rgba(0,0,0,0.6);
 z-index:1000;
 }
+.nav-head{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;}
 .nav-logo{width:110px;}
-.nav-right{display:flex;align-items:center;gap:25px;font-size:14px;}
-.nav-right span,.nav-right a{
-cursor:pointer;text-decoration:none;color:white;transition:0.3s;
+.nav-right{display:flex;align-items:center;gap:12px;font-size:14px;flex-wrap:wrap;}
+.contact-chip{
+cursor:pointer;text-decoration:none;color:#dbeafe;transition:0.25s;
+border:1px solid rgba(191,219,254,0.28);
+background:rgba(15,23,42,0.28);
+padding:8px 12px;border-radius:999px;font-weight:600;
+backdrop-filter:blur(4px);
 }
-.nav-right span:hover,.nav-right a:hover{color:#38bdf8;}
-.logout-btn{color:#ff4d4d;font-weight:bold;}
-.logout-btn:hover{color:white;}
-
+.contact-chip:hover{color:#ffffff;background:rgba(56,189,248,0.22);}
+.logout-btn{
+color:#fecaca;font-weight:700;border:1px solid rgba(248,113,113,0.45);
+background:rgba(127,29,29,0.2);padding:8px 16px;border-radius:10px;cursor:pointer;
+}
+.logout-btn:hover{color:white;background:rgba(220,38,38,0.35);}
+  
 /* HERO */
 .hero{
 height:100vh;
@@ -175,18 +183,23 @@ transition:0.4s;
 
 @media(max-width:768px){
 .navbar{
-padding:12px 14px;
+padding:10px 12px;
 flex-direction:column;
-align-items:flex-start;
-gap:10px;
+align-items:stretch;
+gap:8px;
 }
-.nav-logo{width:92px;}
+.nav-logo{width:96px;}
+.nav-head{align-items:center;}
 .nav-right{
 width:100%;
-gap:10px;
+gap:8px;
 font-size:12px;
-flex-wrap:wrap;
+flex-wrap:nowrap;
+flex-direction:column;
+align-items:stretch;
 }
+.contact-chip{width:100%;text-align:center;padding:9px 10px;font-size:12px;}
+.logout-btn{padding:7px 12px;font-size:12px;}
 .hero{padding:120px 16px 30px;}
 .hero h1{font-size:32px;line-height:1.15;}
 .hero h2{font-size:20px;}
@@ -196,9 +209,9 @@ flex-wrap:wrap;
 .media-section{padding:24px 12px 10px;margin-bottom:-10px;}
 .media-wrapper{height:min(58vw,280px);border-radius:16px;}
 .media-admin{gap:10px;margin-top:12px;}
-.media-admin button{padding:10px 14px;font-size:12px;}
+.media-admin button{padding:10px 14px;font-size:12px;border-radius:12px;}
 .search-box{padding:36px 14px;}
-.search-box input{width:100%;max-width:360px;}
+.search-box input{width:100%;max-width:360px;border:1px solid #cbd5e1;box-shadow:0 8px 20px rgba(15,23,42,0.35);} 
 .footer{padding:40px 20px;}
 }
 
@@ -285,8 +298,8 @@ height:360px;
 margin:0 auto;
 overflow:hidden;
 border-radius:22px;
-border:2px solid rgba(56,189,248,0.45);
-box-shadow:0 18px 50px rgba(2,6,23,0.7);
+border:2px solid rgba(56,189,248,0.55);
+box-shadow:0 18px 50px rgba(2,6,23,0.78);
 background:#020617;
 }
 .media-wrapper img{
@@ -408,11 +421,13 @@ background:#000;padding:60px;text-align:center;
 <div id="mainContent" style="display:none;">
 
 <div class="navbar">
+<div class="nav-head">
 <img src="logo.png" class="nav-logo">
+<button type="button" onclick="logout()" class="logout-btn">Logout</button>
+</div>
 <div class="nav-right">
-<span onclick="copyPhone()">📞 +91 9971 770 060</span>
-<a href="mailto:discovery@vayusodh.com">✉ discovery@vayusodh.com</a>
-<div onclick="logout()" class="logout-btn">Logout</div>
+<button type="button" class="contact-chip" onclick="copyPhone()">📞 +91 9971 770 060</button>
+<a class="contact-chip" href="mailto:discovery@vayusodh.com">✉ discovery@vayusodh.com</a>
 </div>
 </div>
 
