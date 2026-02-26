@@ -88,8 +88,8 @@ font-weight:600;
 }
 .guest-sop-btn:hover{background:rgba(56,189,248,0.35);}
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
-#domainStatus{margin-top:12px;color:#7dd3fc;font-size:13px;min-height:18px;}
-.domain-panel{
+#ownerStatus{margin-top:12px;color:#7dd3fc;font-size:13px;min-height:18px;}
+.owner-panel{
 display:none;
 margin-top:16px;
 padding:14px;
@@ -98,10 +98,9 @@ border-radius:12px;
 background:rgba(15,23,42,0.42);
 text-align:left;
 }
-.domain-panel h4{font-size:15px;margin-bottom:10px;color:#bfdbfe;}
-.domain-help{font-size:12px;color:#bfdbfe;margin-top:10px;line-height:1.4;}
-.domain-users{font-size:13px;color:#e2e8f0;margin-top:10px;line-height:1.5;}
-
+.owner-panel h4{font-size:15px;margin-bottom:10px;color:#bfdbfe;}
+.owner-help{font-size:12px;color:#bfdbfe;margin-top:10px;line-height:1.4;}
+.owner-users{font-size:13px;color:#e2e8f0;margin-top:10px;line-height:1.5;}
 
 /* LOADER */
 .mechanical-loader{
@@ -544,7 +543,7 @@ background:#000;padding:60px;text-align:center;
     <button type="button" class="login-btn" onclick="unlockOwnerPanel()">Unlock</button>
   </div>
 
-  <div id="domainControls" style="display:none;">
+  <div id="ownerControls" style="display:none;">
     <div class="login-row">
       <label for="newLoginId">New Login ID</label>
       <input type="text" id="newLoginId" class="login-input" placeholder="example: arun">
@@ -558,19 +557,19 @@ background:#000;padding:60px;text-align:center;
       <button type="button" class="guest-sop-btn" onclick="removeUser()">Remove User</button>
     </div>
     <div class="login-row">
-      <label for="newDomainKey">Change Domain Key</label>
-      <input type="password" id="newDomainKey" class="login-input" placeholder="New Domain key">
+      <label for="newOwnerKey">Change Owner Key</label>
+      <input type="password" id="newOwnerKey" class="login-input" placeholder="New owner key">
     </div>
     <div class="login-actions" style="justify-content:flex-start;margin-top:10px;">
-      <button type="button" class="login-btn" onclick="changeDomainKey()">Change Domain Key</button>
+      <button type="button" class="login-btn" onclick="changeOwnerKey()">Change Owner Key</button>
     </div>
-    <div class="doamin-users" id="domainUsersList"></div>
+    <div class="owner-users" id="ownerUsersList"></div>
   </div>
-  <div class="domain-help">Tip: Default domain key is <b>VAYU_DOMAIN</b>. Change it immediately after first login.</div>
+  <div class="owner-help">Tip: Default owner key is <b>VAYU_OWNER</b>. Change it immediately after first login.</div>
 </div>
 
 <p id="errorMsg"></p>
-<p id="domainStatus"></p>
+<p id="ownerStatus"></p>
 </div>
 </div>
 
@@ -714,10 +713,10 @@ background:#000;padding:60px;text-align:center;
 </div>
 
 <script>
-var DEFAULT_DOMAIN_KEY="VAYU_DOMAIN";
+var DEFAULT_OWNER_KEY="VAYU_OWNER";
 var credentialStoreKey="vayuCredentials";
-var domainHashKey="vayuDomainHash";
-var domainUnlocked=false;
+var ownerHashKey="vayuOwnerHash";
+var ownerUnlocked=false;
 
 async function sha256(value){
 var utf8=new TextEncoder().encode(value);
@@ -731,10 +730,10 @@ async function initializeSecurity(){
 var existingStore=localStorage.getItem(credentialStoreKey);
 if(!existingStore){
 var defaultPasswordHash=await sha256("Vayu@123");
-var defaultDomainHash=await sha256(DEFAULT_DOMAIN_KEY);
-var defaults={"domain":{"passwordHash":defaultPasswordHash}};
+var defaultOwnerHash=await sha256(DEFAULT_OWNER_KEY);
+var defaults={"owner":{"passwordHash":defaultPasswordHash}};
 localStorage.setItem(credentialStoreKey,JSON.stringify(defaults));
-localStorage.setItem(domainHashKey,defaultDomainHash);
+localStorage.setItem(ownerHashKey,defaultOwnerHash);
 }
 renderUsers();
 }
@@ -749,74 +748,74 @@ localStorage.setItem(credentialStoreKey,JSON.stringify(store));
 renderUsers();
 }
 
-function showDomainStatus(message,isError){
-var status=document.getElementById("domainStatus");
+function showOwnerStatus(message,isError){
+var status=document.getElementById("ownerStatus");
 status.style.color=isError?"#fca5a5":"#7dd3fc";
 status.textContent=message;
 }
 
-function toggleDomainPanel(){
-var panel=document.getElementById("domain");
+function toggleOwnerPanel(){
+var panel=document.getElementById("ownerPanel");
 panel.style.display=panel.style.display==="block"?"none":"block";
 }
 
-async function unlockDomainPanel(){
-var key=document.getElementById("domainKey").value.trim();
-if(!key){showDomainStatus("Domain key required.",true);return;}
+async function unlockOwnerPanel(){
+var key=document.getElementById("ownerKey").value.trim();
+if(!key){showOwnerStatus("Owner key required.",true);return;}
 var inputHash=await sha256(key);
-var savedHash=localStorage.getItem(domainHashKey)||"";
+var savedHash=localStorage.getItem(ownerHashKey)||"";
 if(inputHash===savedHash){
-domainUnlocked=true;
-document.getElementById("domainControls").style.display="block";
-showDomainStatus("Domain unlocked. You can now control login permissions.",false);
+ownerUnlocked=true;
+document.getElementById("ownerControls").style.display="block";
+showOwnerStatus("Owner unlocked. You can now control login permissions.",false);
 }else{
-showOwnerStatus("Invalid domain key.",true);
+showOwnerStatus("Invalid owner key.",true);
 }
 }
 
 function renderUsers(){
 var store=getCredentialStore();
 var users=Object.keys(store);
-document.getElementById("domainUsersList").textContent="Allowed Login IDs: "+(users.length?users.join(", "):"none");
+document.getElementById("ownerUsersList").textContent="Allowed Login IDs: "+(users.length?users.join(", "):"none");
 }
 
 async function addOrUpdateUser(){
-if(!domainUnlocked){showDomainStatus("Unlock domain panel first.",true);return;}
+if(!ownerUnlocked){showOwnerStatus("Unlock owner panel first.",true);return;}
 var loginId=document.getElementById("newLoginId").value.trim().toLowerCase();
 var password=document.getElementById("newLoginPassword").value;
 if(!loginId||password.length<8){
-showDomainStatus("Login ID is required and password must be at least 8 characters.",true);
+showOwnerStatus("Login ID is required and password must be at least 8 characters.",true);
 return;
 }
 var store=getCredentialStore();
 store[loginId]={passwordHash:await sha256(password)};
 saveCredentialStore(store);
-showDomainStatus("User permission updated for: "+loginId,false);
+showOwnerStatus("User permission updated for: "+loginId,false);
 document.getElementById("newLoginPassword").value="";
 }
 
 function removeUser(){
-if(!domainUnlocked){showOwnerStatus("Unlock domain panel first.",true);return;}
+if(!ownerUnlocked){showOwnerStatus("Unlock owner panel first.",true);return;}
 var loginId=document.getElementById("newLoginId").value.trim().toLowerCase();
-if(!loginId){showDomainStatus("Enter login ID to remove.",true);return;}
-if(loginId==="domain"){showDomainStatus("Default domain login ID cannot be removed.",true);return;}
+if(!loginId){showOwnerStatus("Enter login ID to remove.",true);return;}
+if(loginId==="owner"){showOwnerStatus("Default owner login ID cannot be removed.",true);return;}
 var store=getCredentialStore();
-if(!store[loginId]){showDomainStatus("Login ID not found.",true);return;}
+if(!store[loginId]){showOwnerStatus("Login ID not found.",true);return;}
 delete store[loginId];
 saveCredentialStore(store);
-showDomainStatus("Login permission removed for: "+loginId,false);
+showOwnerStatus("Login permission removed for: "+loginId,false);
 }
 
-async function changeDomainKey(){
-if(!DomainUnlocked){showDomainStatus("Unlock Domain panel first.",true);return;}
-var newDomainKey=document.getElementById("newDomainKey").value.trim();
-if(newDomainKey.length<10){
-showDomainStatus("Domain key must be at least 10 characters.",true);
+async function changeOwnerKey(){
+if(!ownerUnlocked){showOwnerStatus("Unlock owner panel first.",true);return;}
+var newOwnerKey=document.getElementById("newOwnerKey").value.trim();
+if(newOwnerKey.length<10){
+showOwnerStatus("Owner key must be at least 10 characters.",true);
 return;
 }
-localStorage.setItem(domainHashKey,await sha256(newDomainKey));
-document.getElementById("newDomainKey").value="";
-showDomainStatus("Domain key changed successfully. Store this securely.",false);
+localStorage.setItem(ownerHashKey,await sha256(newOwnerKey));
+document.getElementById("newOwnerKey").value="";
+showOwnerStatus("Owner key changed successfully. Store this securely.",false);
 }
 
 document.getElementById("password").addEventListener("keyup",function(e){
