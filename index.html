@@ -119,15 +119,16 @@ background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
 box-shadow:0 0 20px rgba(0,0,0,0.6);
 z-index:1000;
 }
-.nav-head{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;}
+.nav-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex:0 0 auto;}
 .nav-logo{width:110px;}
-.nav-right{display:flex;align-items:center;gap:12px;font-size:14px;flex-wrap:wrap;}
+.nav-right{display:flex;align-items:center;gap:10px;font-size:14px;flex-wrap:nowrap;margin-left:auto;}
 .contact-chip{
 cursor:pointer;text-decoration:none;color:#dbeafe;transition:0.25s;
 border:1px solid rgba(191,219,254,0.28);
 background:rgba(15,23,42,0.28);
 padding:8px 12px;border-radius:999px;font-weight:600;
 backdrop-filter:blur(4px);
+white-space:nowrap;
 }
 .contact-chip:hover{color:#ffffff;background:rgba(56,189,248,0.22);}
 .logout-btn{
@@ -189,7 +190,7 @@ align-items:stretch;
 gap:8px;
 }
 .nav-logo{width:96px;}
-.nav-head{align-items:center;}
+.nav-head{align-items:center;flex:1 1 auto;width:100%;}
 .nav-right{
 width:100%;
 gap:8px;
@@ -197,6 +198,7 @@ font-size:12px;
 flex-wrap:nowrap;
 flex-direction:column;
 align-items:stretch;
+margin-left:0;
 }
 .contact-chip{width:100%;text-align:center;padding:9px 10px;font-size:12px;}
 .logout-btn{padding:7px 12px;font-size:12px;}
@@ -307,10 +309,12 @@ position:absolute;
 inset:0;
 width:100%;
 height:100%;
-object-fit:cover;
+object-fit:contain;
 opacity:0;
 transform:scale(1.03);
 transition:opacity 0.9s ease,transform 0.9s ease;
+background:#020617;
+padding:8px;
 }
 .media-wrapper img.active{
 opacity:1;
@@ -480,7 +484,6 @@ background:#000;padding:60px;text-align:center;
 <button type="button" onclick="prevSlide()">◀ Prev</button>
 <button type="button" id="pauseBtn" onclick="toggleAutoplay()">⏸ Pause Auto</button>
 <button type="button" onclick="nextSlide()">Next ▶</button>
-<button type="button" id="fitBtn" onclick="toggleCompressMode()">🗜 Compress View</button>
 </div>
 </section>
 
@@ -597,12 +600,6 @@ startAutoplay();
 button.innerHTML="▶ Resume Auto";
 stopAutoplay();
 }
-}
-function toggleCompressMode(){
-var wrapper=document.getElementById("mediaWrapper");
-var button=document.getElementById("fitBtn");
-var compress=wrapper.classList.toggle("compress-mode");
-button.innerHTML=compress?"🖼 Cover View":"🗜 Compress View";
 }
 startAutoplay();
 
