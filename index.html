@@ -9,7 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
 font-family:Segoe UI;
-background:#0b1220;
+background:#060b19;
 color:white;
 overflow-x:hidden;
 scroll-behavior:smooth;
@@ -41,7 +41,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:radial-gradient(circle at top,#1e3a8a,#0f172a);
+background:radial-gradient(circle at top,#2563eb,#0f172a 60%,#020617);
 }
 .logo{width:140px;margin-bottom:20px;}
 .login-input{
@@ -54,6 +54,17 @@ border-radius:6px;background:#38bdf8;
 cursor:pointer;font-weight:bold;transition:0.3s;
 }
 .login-btn:hover{background:#0ea5e9;transform:scale(1.05);}
+.guest-sop-btn{
+margin-top:14px;
+padding:10px 18px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,0.45);
+background:rgba(15,23,42,0.35);
+color:#e0f2fe;
+cursor:pointer;
+font-weight:600;
+}
+.guest-sop-btn:hover{background:rgba(56,189,248,0.35);}
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
 
 /* LOADER */
@@ -230,7 +241,7 @@ margin-left:0;
 
 /* VISION */
 .concept-section{
-background:linear-gradient(to right,#0f172a,#1e3a8a);
+background:linear-gradient(120deg,#0f172a,#1e3a8a,#0284c7);
 padding:100px 40px;
 }
 .concept-title{
@@ -261,16 +272,43 @@ box-shadow:0 0 30px #38bdf8;
 padding:80px 20px;
 display:flex;justify-content:center;
 gap:30px;flex-wrap:wrap;
-background:#111827;
+background:linear-gradient(180deg,#111827,#0f1f3c);
 }
 .lib-card{
-background:#1e293b;
-padding:40px;width:240px;
+background:radial-gradient(circle at top,#334155,#1e293b);
+padding:34px 24px 28px;width:240px;
 text-align:center;border-radius:15px;
 cursor:pointer;transition:0.4s;
 position:relative;overflow:hidden;
 font-size:18px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
 }
+.sun-icon{
+width:64px;
+height:64px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+color:#111827;
+background:radial-gradient(circle,#fef08a 0%,#facc15 58%,#f59e0b 100%);
+box-shadow:0 0 18px rgba(250,204,21,0.7);
+position:relative;
+}
+.sun-icon::after{
+content:'';
+position:absolute;
+inset:-9px;
+border-radius:50%;
+border:2px dashed rgba(250,204,21,0.65);
+animation:spin 14s linear infinite;
+}
+.lib-title{font-weight:800;}
+.lib-sub{font-size:12px;color:#cbd5e1;line-height:1.45;}
 .lib-card::after{
 content:'';position:absolute;
 top:0;left:-100%;
@@ -284,7 +322,48 @@ transform:scale(1.1);
 box-shadow:0 0 30px #38bdf8;
 background:#38bdf8;color:black;
 }
+.lib-card:hover .lib-sub{color:#111827;}
 
+.policy-modal{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+background:rgba(2,6,23,0.82);
+z-index:2200;
+padding:18px;
+}
+.policy-panel{
+width:min(680px,100%);
+background:linear-gradient(180deg,#1e293b,#0f172a);
+border:1px solid rgba(148,163,184,0.4);
+border-radius:18px;
+padding:24px;
+box-shadow:0 24px 45px rgba(2,6,23,0.68);
+}
+.policy-panel h3{color:#7dd3fc;margin-bottom:8px;}
+.policy-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+margin-top:16px;
+}
+.policy-block{
+background:rgba(15,23,42,0.78);
+border:1px solid rgba(148,163,184,0.25);
+border-radius:12px;
+padding:12px;
+}
+.policy-block label{display:block;margin-bottom:8px;font-size:14px;color:#cbd5e1;}
+.policy-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;}
+.policy-actions button{
+padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
+}
+.policy-save{background:#22d3ee;color:#082f49;}
+.policy-close{background:#334155;color:#e2e8f0;}
+#policyStatus{margin-top:12px;color:#86efac;font-weight:700;}
+  
 /* MEDIA */
 .media-section{
 padding:40px 20px;
@@ -406,6 +485,7 @@ background:#000;padding:60px;text-align:center;
 <h2>VAYU Secure Access Portal</h2>
 <input type="password" id="password" class="login-input" placeholder="Enter Password">
 <button onclick="checkPassword()" class="login-btn">Login</button>
+<button type="button" class="guest-sop-btn" onclick="openSOP()">☀ Guest SOP Access</button>
 <p id="errorMsg"></p>
 </div>
 
@@ -467,10 +547,50 @@ background:#000;padding:60px;text-align:center;
 </section>
 
 <section class="library-links">
-<div class="lib-card" onclick="openSOP()">SOP</div>
-<div class="lib-card">Policy</div>
-<div class="lib-card">Form</div>
+<div class="lib-card" onclick="openSOP()">
+  <div class="sun-icon">☀</div>
+  <div class="lib-title">SOP</div>
+  <div class="lib-sub">Open access for all users</div>
+</div>
+<div class="lib-card" onclick="openPolicyControls()">
+  <div class="sun-icon">☀</div>
+  <div class="lib-title">Policy</div>
+  <div class="lib-sub">Controlled access with role constraints</div>
+</div>
+<div class="lib-card">
+  <div class="sun-icon">☀</div>
+  <div class="lib-title">Form</div>
+  <div class="lib-sub">Bright workflow templates</div>
+</div>
 </section>
+
+<div class="policy-modal" id="policyModal">
+  <div class="policy-panel">
+    <h3>Policy Control Center</h3>
+    <p>Apply control constraints for policy visibility and approvals.</p>
+    <div class="policy-grid">
+      <div class="policy-block">
+        <label for="policyRole">Access role</label>
+        <select id="policyRole">
+          <option>Viewer</option>
+          <option>Reviewer</option>
+          <option>Approver</option>
+          <option>Admin</option>
+        </select>
+      </div>
+      <div class="policy-block">
+        <label><input type="checkbox" id="policyTwoStep"> Require two-step approval</label>
+        <label><input type="checkbox" id="policyWatermark"> Enable confidential watermark</label>
+        <label><input type="checkbox" id="policyDownload"> Restrict download</label>
+      </div>
+    </div>
+    <div class="policy-actions">
+      <button type="button" class="policy-save" onclick="savePolicyControls()">Save controls</button>
+      <button type="button" class="policy-close" onclick="closePolicyControls()">Close</button>
+    </div>
+    <div id="policyStatus"></div>
+  </div>
+</div>
 
 <section class="media-section">
 <div class="media-wrapper" id="mediaWrapper">
@@ -546,6 +666,22 @@ navigator.clipboard.writeText("+919971770060");
 alert("Phone number copied!");
 }
 function openSOP(){window.location.href="sop.html";}
+function openPolicyControls(){
+document.getElementById("policyModal").style.display="flex";
+document.getElementById("policyStatus").innerHTML="";
+}
+function closePolicyControls(){
+document.getElementById("policyModal").style.display="none";
+}
+function savePolicyControls(){
+var role=document.getElementById("policyRole").value;
+var constraints=[];
+if(document.getElementById("policyTwoStep").checked){constraints.push("2-step approval");}
+if(document.getElementById("policyWatermark").checked){constraints.push("watermark");}
+if(document.getElementById("policyDownload").checked){constraints.push("download restriction");}
+var summary=constraints.length?constraints.join(", "):"no extra constraints";
+document.getElementById("policyStatus").innerHTML="Saved: "+role+" role with "+summary+".";
+}
 function searchContent(){
 var input=document.getElementById("searchInput").value.toLowerCase();
 var content=document.querySelector(".about").innerText.toLowerCase();
