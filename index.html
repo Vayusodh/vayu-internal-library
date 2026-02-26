@@ -42,20 +42,42 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 background:radial-gradient(circle at top,#2563eb,#0f172a 60%,#020617);
+padding:24px;
 }
-.logo{width:140px;margin-bottom:20px;}
+.lock-card{
+width:min(92vw,560px);
+background:rgba(2,6,23,0.35);
+border:1px solid rgba(186,230,253,0.25);
+border-radius:18px;
+padding:30px 26px;
+backdrop-filter:blur(7px);
+box-shadow:0 20px 40px rgba(2,6,23,0.45);
+text-align:center;
+}
+.logo-wrap{
+background:rgba(248,250,252,0.95);
+display:inline-flex;
+padding:14px 24px;
+border-radius:12px;
+margin-bottom:18px;
+box-shadow:0 8px 18px rgba(2,6,23,0.4);
+}
+.logo{width:180px;display:block;filter:contrast(1.22) saturate(1.2);}
+.login-row{display:flex;flex-direction:column;gap:10px;text-align:left;margin-top:14px;}
+.login-row label{font-size:13px;font-weight:600;color:#dbeafe;}
 .login-input{
-padding:12px;border-radius:6px;border:none;
-margin-top:10px;width:260px;outline:none;
+padding:12px;border-radius:8px;border:1px solid #bfdbfe;
+width:100%;outline:none;font-size:17px;
 }
+.login-input:focus{border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,0.26);}
+.login-actions{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:18px;}
 .login-btn{
-padding:12px 25px;margin-top:15px;border:none;
+padding:12px 25px;border:none;
 border-radius:6px;background:#38bdf8;
 cursor:pointer;font-weight:bold;transition:0.3s;
 }
 .login-btn:hover{background:#0ea5e9;transform:scale(1.05);}
 .guest-sop-btn{
-margin-top:14px;
 padding:10px 18px;
 border-radius:999px;
 border:1px solid rgba(255,255,255,0.45);
@@ -66,6 +88,20 @@ font-weight:600;
 }
 .guest-sop-btn:hover{background:rgba(56,189,248,0.35);}
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
+#domainStatus{margin-top:12px;color:#7dd3fc;font-size:13px;min-height:18px;}
+.domain-panel{
+display:none;
+margin-top:16px;
+padding:14px;
+border:1px solid rgba(125,211,252,0.35);
+border-radius:12px;
+background:rgba(15,23,42,0.42);
+text-align:left;
+}
+.domain-panel h4{font-size:15px;margin-bottom:10px;color:#bfdbfe;}
+.domain-help{font-size:12px;color:#bfdbfe;margin-top:10px;line-height:1.4;}
+.domain-users{font-size:13px;color:#e2e8f0;margin-top:10px;line-height:1.5;}
+
 
 /* LOADER */
 .mechanical-loader{
@@ -481,12 +517,61 @@ background:#000;padding:60px;text-align:center;
 
 <!-- LOGIN -->
 <div class="lock-container" id="loginBox">
-<img src="logo.png" class="logo">
+<div class="lock-card">
+<div class="logo-wrap"><img src="logo.png" class="logo" alt="VAYU logo"></div>
 <h2>VAYU Secure Access Portal</h2>
-<input type="password" id="password" class="login-input" placeholder="Enter Password">
-<button onclick="checkPassword()" class="login-btn">Login</button>
+<div class="login-row">
+<label for="loginId">Login ID</label>
+<input type="text" id="loginId" class="login-input" placeholder="Enter Login ID" autocomplete="username">
+</div>
+<div class="login-row">
+<label for="password">Password</label>
+<input type="password" id="password" class="login-input" placeholder="Enter Password" autocomplete="current-password">
+</div>
+<div class="login-actions">
+<button onclick="checkPassword()" class="login-btn">Secure Login</button>
 <button type="button" class="guest-sop-btn" onclick="openSOP()">☀ Guest SOP Access</button>
+</div>
+<button type="button" class="guest-sop-btn" onclick="toggleOwnerPanel()">Owner Access Control</button>
+
+<div class="owner-panel" id="ownerPanel">
+  <h4>Owner Control (Only You)</h4>
+  <div class="login-row">
+    <label for="ownerKey">Owner Key</label>
+    <input type="password" id="ownerKey" class="login-input" placeholder="Enter owner key">
+  </div>
+  <div class="login-actions" style="justify-content:flex-start;margin-top:10px;">
+    <button type="button" class="login-btn" onclick="unlockOwnerPanel()">Unlock</button>
+  </div>
+
+  <div id="domainControls" style="display:none;">
+    <div class="login-row">
+      <label for="newLoginId">New Login ID</label>
+      <input type="text" id="newLoginId" class="login-input" placeholder="example: arun">
+    </div>
+    <div class="login-row">
+      <label for="newLoginPassword">New Login Password</label>
+      <input type="password" id="newLoginPassword" class="login-input" placeholder="Create strong password">
+    </div>
+    <div class="login-actions" style="justify-content:flex-start;margin-top:10px;">
+      <button type="button" class="login-btn" onclick="addOrUpdateUser()">Add / Update User</button>
+      <button type="button" class="guest-sop-btn" onclick="removeUser()">Remove User</button>
+    </div>
+    <div class="login-row">
+      <label for="newDomainKey">Change Domain Key</label>
+      <input type="password" id="newDomainKey" class="login-input" placeholder="New Domain key">
+    </div>
+    <div class="login-actions" style="justify-content:flex-start;margin-top:10px;">
+      <button type="button" class="login-btn" onclick="changeDomainKey()">Change Domain Key</button>
+    </div>
+    <div class="doamin-users" id="domainUsersList"></div>
+  </div>
+  <div class="domain-help">Tip: Default domain key is <b>VAYU_DOMAIN</b>. Change it immediately after first login.</div>
+</div>
+
 <p id="errorMsg"></p>
+<p id="domainStatus"></p>
+</div>
 </div>
 
   <div class="mechanical-loader" id="gearLoader">
@@ -629,34 +714,147 @@ background:#000;padding:60px;text-align:center;
 </div>
 
 <script>
+var DEFAULT_DOMAIN_KEY="VAYU_DOMAIN";
+var credentialStoreKey="vayuCredentials";
+var domainHashKey="vayuDomainHash";
+var domainUnlocked=false;
+
+async function sha256(value){
+var utf8=new TextEncoder().encode(value);
+var hashBuffer=await crypto.subtle.digest("SHA-256",utf8);
+return Array.from(new Uint8Array(hashBuffer)).map(function(byte){
+return byte.toString(16).padStart(2,"0");
+}).join("");
+}
+
+async function initializeSecurity(){
+var existingStore=localStorage.getItem(credentialStoreKey);
+if(!existingStore){
+var defaultPasswordHash=await sha256("Vayu@123");
+var defaultDomainHash=await sha256(DEFAULT_DOMAIN_KEY);
+var defaults={"domain":{"passwordHash":defaultPasswordHash}};
+localStorage.setItem(credentialStoreKey,JSON.stringify(defaults));
+localStorage.setItem(domainHashKey,defaultDomainHash);
+}
+renderUsers();
+}
+
+function getCredentialStore(){
+try{return JSON.parse(localStorage.getItem(credentialStoreKey)||"{}");}
+catch(e){return {};}
+}
+
+function saveCredentialStore(store){
+localStorage.setItem(credentialStoreKey,JSON.stringify(store));
+renderUsers();
+}
+
+function showDomainStatus(message,isError){
+var status=document.getElementById("domainStatus");
+status.style.color=isError?"#fca5a5":"#7dd3fc";
+status.textContent=message;
+}
+
+function toggleDomainPanel(){
+var panel=document.getElementById("domain");
+panel.style.display=panel.style.display==="block"?"none":"block";
+}
+
+async function unlockDomainPanel(){
+var key=document.getElementById("domainKey").value.trim();
+if(!key){showDomainStatus("Domain key required.",true);return;}
+var inputHash=await sha256(key);
+var savedHash=localStorage.getItem(domainHashKey)||"";
+if(inputHash===savedHash){
+domainUnlocked=true;
+document.getElementById("domainControls").style.display="block";
+showDomainStatus("Domain unlocked. You can now control login permissions.",false);
+}else{
+showOwnerStatus("Invalid domain key.",true);
+}
+}
+
+function renderUsers(){
+var store=getCredentialStore();
+var users=Object.keys(store);
+document.getElementById("domainUsersList").textContent="Allowed Login IDs: "+(users.length?users.join(", "):"none");
+}
+
+async function addOrUpdateUser(){
+if(!domainUnlocked){showDomainStatus("Unlock domain panel first.",true);return;}
+var loginId=document.getElementById("newLoginId").value.trim().toLowerCase();
+var password=document.getElementById("newLoginPassword").value;
+if(!loginId||password.length<8){
+showDomainStatus("Login ID is required and password must be at least 8 characters.",true);
+return;
+}
+var store=getCredentialStore();
+store[loginId]={passwordHash:await sha256(password)};
+saveCredentialStore(store);
+showDomainStatus("User permission updated for: "+loginId,false);
+document.getElementById("newLoginPassword").value="";
+}
+
+function removeUser(){
+if(!domainUnlocked){showOwnerStatus("Unlock domain panel first.",true);return;}
+var loginId=document.getElementById("newLoginId").value.trim().toLowerCase();
+if(!loginId){showDomainStatus("Enter login ID to remove.",true);return;}
+if(loginId==="domain"){showDomainStatus("Default domain login ID cannot be removed.",true);return;}
+var store=getCredentialStore();
+if(!store[loginId]){showDomainStatus("Login ID not found.",true);return;}
+delete store[loginId];
+saveCredentialStore(store);
+showDomainStatus("Login permission removed for: "+loginId,false);
+}
+
+async function changeDomainKey(){
+if(!DomainUnlocked){showDomainStatus("Unlock Domain panel first.",true);return;}
+var newDomainKey=document.getElementById("newDomainKey").value.trim();
+if(newDomainKey.length<10){
+showDomainStatus("Domain key must be at least 10 characters.",true);
+return;
+}
+localStorage.setItem(domainHashKey,await sha256(newDomainKey));
+document.getElementById("newDomainKey").value="";
+showDomainStatus("Domain key changed successfully. Store this securely.",false);
+}
+
 document.getElementById("password").addEventListener("keyup",function(e){
 if(e.key==="Enter"){checkPassword();}
 });
-window.onload=function(){
+document.getElementById("loginId").addEventListener("keyup",function(e){
+if(e.key==="Enter"){checkPassword();}
+});
+window.onload=async function(){
+await initializeSecurity();
 if(sessionStorage.getItem("accessGranted")==="yes"){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("mainContent").style.display="block";
 document.getElementById("gearLoader").style.display="none";
 }
 }
-function checkPassword(){
-if(document.getElementById("password").value==="Vayu"){
-
-// Hide lock screen
+async function checkPassword(){
+var loginId=document.getElementById("loginId").value.trim().toLowerCase();
+var password=document.getElementById("password").value;
+if(!loginId||!password){
+document.getElementById("errorMsg").innerHTML="Login ID and password are required.";
+document.getElementById("errorMsg").style.display="block";
+return;
+}
+var store=getCredentialStore();
+var userRecord=store[loginId];
+var passwordHash=await sha256(password);
+if(userRecord&&userRecord.passwordHash===passwordHash){
+document.getElementById("errorMsg").style.display="none";
 document.getElementById("loginBox").style.display="none";
-
-// Show gear animation
 document.getElementById("gearLoader").style.display="flex";
-
-// After 4 seconds show home
 setTimeout(function(){
 sessionStorage.setItem("accessGranted","yes");
 document.getElementById("gearLoader").style.display="none";
 document.getElementById("mainContent").style.display="block";
-},4000);
-
+},2500);
 }else{
-document.getElementById("errorMsg").innerHTML="Access Denied. Contact Vayu Team.";
+document.getElementById("errorMsg").innerHTML="Access denied. Invalid login ID or password.Please contact Vayu IT Team";
 document.getElementById("errorMsg").style.display="block";
 }
 }
