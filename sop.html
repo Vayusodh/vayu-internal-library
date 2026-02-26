@@ -1,176 +1,454 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>VAYU SOP Dashboard</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <title>VAYU | SOP Command Center</title>
+  <style>
+    :root {
+      --bg: #060b16;
+      --surface: rgba(13, 20, 37, 0.8);
+      --surface-strong: #101c35;
+      --accent: #4adeff;
+      --accent-2: #8b5cf6;
+      --text: #e6f4ff;
+      --muted: #8ca7c2;
+      --danger: #ff6b6b;
+      --shadow: 0 24px 80px rgba(4, 8, 20, 0.55);
+      --radius: 20px;
+    }
 
-<style>
-body{
-margin:0;
-font-family:Segoe UI;
-background:#0b1220;
-color:white;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* NAVBAR */
-.navbar{
-position:fixed;
-top:0;
-width:100%;
-padding:15px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:linear-gradient(90deg,#0f172a,#1e3a8a,#0ea5e9);
-}
+    body {
+      min-height: 100vh;
+      font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(74, 222, 255, 0.16), transparent 35%),
+        radial-gradient(circle at 92% 20%, rgba(139, 92, 246, 0.18), transparent 30%),
+        linear-gradient(135deg, #040710 0%, #0a1326 45%, #050a17 100%);
+      overflow-x: hidden;
+    }
 
-.nav-logo{width:110px;}
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-.back-btn{
-background:#38bdf8;
-padding:8px 15px;
-border-radius:5px;
-cursor:pointer;
-color:black;
-font-weight:bold;
-}
+    body::before {
+      background-image: linear-gradient(rgba(74, 222, 255, 0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(74, 222, 255, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at 50% 30%, black, transparent 75%);
+    }
 
-/* TITLE */
-.page-title{
-margin-top:120px;
-text-align:center;
-font-size:32px;
-color:#38bdf8;
-}
+    body::after {
+      background: radial-gradient(circle at 50% 110%, rgba(74, 222, 255, 0.16), transparent 40%);
+      filter: blur(20px);
+    }
 
-/* SEARCH */
-.search-box{
-text-align:center;
-margin:30px 0;
-}
+    .shell {
+      width: min(1180px, 92vw);
+      margin: 28px auto 44px;
+      padding: 28px;
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(16, 28, 53, 0.72), rgba(8, 14, 28, 0.86));
+      border: 1px solid rgba(129, 164, 199, 0.22);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
 
-.search-box input{
-padding:10px;
-width:300px;
-border-radius:6px;
-border:none;
-}
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
 
-/* SOP GRID */
-.sop-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-padding:40px;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-.sop-card{
-background:#1e293b;
-padding:30px;
-border-radius:15px;
-text-align:center;
-cursor:pointer;
-transition:0.3s;
-}
+    .logo-wrap {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(74, 222, 255, 0.3);
+      background: linear-gradient(140deg, rgba(74, 222, 255, 0.2), rgba(139, 92, 246, 0.2));
+    }
 
-.sop-card:hover{
-background:#38bdf8;
-color:black;
-transform:scale(1.05);
-}
+    .logo-wrap img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(74, 222, 255, 0.4));
+    }
 
-/* PDF VIEWER */
-#pdfViewer{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.9);
-justify-content:center;
-align-items:center;
-}
+    .brand h1 {
+      font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
 
-#pdfViewer iframe{
-width:80%;
-height:80%;
-}
+    .brand p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 2px;
+    }
 
-.close-btn{
-position:absolute;
-top:20px;
-right:40px;
-font-size:20px;
-cursor:pointer;
-color:white;
-}
-</style>
+    .ghost-btn {
+      appearance: none;
+      border: 1px solid rgba(74, 222, 255, 0.35);
+      color: var(--text);
+      background: linear-gradient(145deg, rgba(74, 222, 255, 0.15), rgba(139, 92, 246, 0.1));
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .ghost-btn:hover,
+    .ghost-btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(74, 222, 255, 0.25);
+      outline: none;
+    }
+
+    .hero {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1.4fr 1fr;
+      margin-bottom: 24px;
+    }
+
+    .hero-main,
+    .hero-side {
+      border: 1px solid rgba(134, 170, 210, 0.2);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      top: -110px;
+      right: -70px;
+      background: radial-gradient(circle, rgba(74, 222, 255, 0.45), transparent 70%);
+    }
+
+    .hero-main h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .hero-main p,
+    .hero-side p {
+      color: #b4cae0;
+      line-height: 1.55;
+      font-size: 0.95rem;
+      max-width: 65ch;
+    }
+
+    .pulse {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #c5f4ff;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    .pulse::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5);
+      animation: ping 1.7s infinite;
+    }
+
+    @keyframes ping {
+      70% { box-shadow: 0 0 0 13px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
+    .quick-tags {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-tags button {
+      border: 1px solid rgba(161, 192, 228, 0.22);
+      border-radius: 999px;
+      background: rgba(10, 19, 35, 0.7);
+      color: #c7e1f7;
+      padding: 7px 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-tags button:hover,
+    .quick-tags button:focus-visible {
+      background: rgba(74, 222, 255, 0.2);
+      color: white;
+      border-color: rgba(74, 222, 255, 0.4);
+      outline: none;
+    }
+
+    .finder {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 10px 0 24px;
+      border: 1px solid rgba(122, 159, 196, 0.22);
+      border-radius: 14px;
+      background: rgba(4, 10, 20, 0.8);
+      padding: 10px 14px;
+    }
+
+    .finder input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.98rem;
+      padding: 6px 2px;
+    }
+
+    .finder input:focus {
+      outline: none;
+    }
+
+    .finder span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .sop-card {
+      border: 1px solid rgba(130, 169, 208, 0.22);
+      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(14, 23, 42, 0.95), rgba(11, 17, 33, 0.95));
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .sop-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(74, 222, 255, 0.55);
+      box-shadow: 0 8px 26px rgba(74, 222, 255, 0.16);
+    }
+
+    .sop-card h3 {
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    .sop-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      min-height: 42px;
+    }
+
+    .sop-card button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #03131b;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(120deg, #67e8f9, #7dd3fc);
+      transition: filter 0.2s ease;
+    }
+
+    .sop-card button:hover,
+    .sop-card button:focus-visible {
+      filter: brightness(1.08);
+      outline: none;
+    }
+
+    .empty-state {
+      margin-top: 18px;
+      border: 1px dashed rgba(140, 175, 209, 0.4);
+      border-radius: 14px;
+      padding: 16px;
+      color: var(--muted);
+      display: none;
+    }
+
+    .viewer {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 8, 17, 0.82);
+      backdrop-filter: blur(4px);
+      z-index: 99;
+      padding: 20px;
+    }
+
+    .viewer.active {
+      display: flex;
+    }
+
+    .viewer-shell {
+      width: min(1100px, 95vw);
+      height: min(88vh, 900px);
+      border-radius: 16px;
+      background: #050d1c;
+      border: 1px solid rgba(133, 171, 211, 0.28);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .viewer-top {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      background: rgba(8, 16, 32, 0.95);
+      border-bottom: 1px solid rgba(133, 171, 211, 0.2);
+    }
+
+    .viewer-top strong {
+      font-size: 0.9rem;
+      color: #d8ecff;
+      max-width: 75%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .viewer-close {
+      border: 1px solid rgba(255, 107, 107, 0.35);
+      color: #ffd1d1;
+      background: rgba(255, 107, 107, 0.1);
+      border-radius: 10px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100% - 50px);
+      border: none;
+      background: #0a1020;
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        margin: 16px auto 24px;
+        padding: 16px;
+      }
+
+      .topbar {
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo-wrap">
+          <img src="logo.png" alt="VAYU logo">
+        </div>
+        <div>
+          <h1>SOP Command Center</h1>
+          <p>Creative, clean, and fast access to critical protocols.</p>
+        </div>
+      </div>
+      <button id="homeBtn" class="ghost-btn" type="button">⬅ Return to Home</button>
+    </header>
 
-<div class="navbar">
-<img src="logo.png" class="nav-logo">
-<div class="back-btn" onclick="goHome()">⬅ Back</div>
-</div>
+    <section class="hero" aria-label="SOP overview">
+      <article class="hero-main">
+        <h2>Operational intelligence, redesigned.</h2>
+        <p>This page is inspired by a control-room experience so team members can locate the right SOP quickly without clutter. The visual design is fully different from a standard homepage layout while keeping readability high.</p>
+        <div class="pulse">System status: SOP index online</div>
+      </article>
+      <aside class="hero-side">
+        <h3 style="margin-bottom:8px;">Quick Filters</h3>
+        <p>Use these shortcuts to jump into procedures by category. Search is instant and works with keyboard too.</p>
+        <div class="quick-tags" id="quickTags"></div>
+      </aside>
+    </section>
 
-<div class="page-title">
-Standard Operating Procedures
-</div>
+    <label class="finder" for="searchInput" aria-label="Search SOPs">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm0-2a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm8.7 4.3-4.2-4.2 1.4-1.4 4.2 4.2-1.4 1.4Z" fill="currentColor"/>
+      </svg>
+      <input id="searchInput" type="search" autocomplete="off" placeholder="Search SOP by title or keyword..." maxlength="70">
+      <span>Esc to clear</span>
+    </label>
 
-<div class="search-box">
-<input type="text" id="searchInput" placeholder="Search SOP..." onkeyup="searchSOP()">
-</div>
+    <section class="grid" id="sopGrid" aria-live="polite"></section>
+    <p class="empty-state" id="emptyState">No SOP matched your search. Try another keyword.</p>
+  </main>
 
-<div class="sop-container" id="sopContainer">
+  <section class="viewer" id="viewer" aria-modal="true" role="dialog" aria-label="SOP viewer">
+    <div class="viewer-shell">
+      <div class="viewer-top">
+        <strong id="viewerTitle">SOP Document</strong>
+        <button class="viewer-close" id="closeViewer" type="button">Close ✕</button>
+      </div>
+      <iframe id="pdfFrame" title="SOP PDF viewer" loading="lazy"></iframe>
+    </div>
+  </section>
 
-<div class="sop-card" onclick="openPDF('sop1.pdf')">
-Gas Handling SOP
-</div>
-
-<div class="sop-card" onclick="openPDF('sop2.pdf')">
-Cleanroom Protocol SOP
-</div>
-
-<div class="sop-card" onclick="openPDF('sop3.pdf')">
-Chemical Safety SOP
-</div>
-
-</div>
-
-<!-- PDF VIEWER -->
-<div id="pdfViewer">
-<div class="close-btn" onclick="closePDF()">✖ Close</div>
-<iframe id="pdfFrame"></iframe>
-</div>
-
-<script>
-function goHome(){
-window.location.href="index.html";
-}
-
-function openPDF(file){
-document.getElementById("pdfViewer").style.display="flex";
-document.getElementById("pdfFrame").src=file;
-}
-
-function closePDF(){
-document.getElementById("pdfViewer").style.display="none";
-document.getElementById("pdfFrame").src="";
-}
-
-function searchSOP(){
-let input=document.getElementById("searchInput").value.toLowerCase();
-let cards=document.getElementsByClassName("sop-card");
-
-for(let i=0;i<cards.length;i++){
-let text=cards[i].innerText.toLowerCase();
-cards[i].style.display=text.includes(input) ? "block" : "none";
-}
-}
-</script>
+  <script src="sop.js" defer></script>
 
 </body>
 </html>
