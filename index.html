@@ -714,11 +714,16 @@ background:#000;padding:60px;text-align:center;
 
 <script>
 var DEFAULT_OWNER_KEY="VAYU_OWNER";
+var DEFAULT_OWNER_LOGIN_ID="owner";
+var DEFAULT_OWNER_PASSWORD="Vayu@123";
 var credentialStoreKey="vayuCredentials";
 var ownerHashKey="vayuOwnerHash";
 var ownerUnlocked=false;
 
 async function sha256(value){
+if(!(window.crypto&&window.crypto.subtle)){
+return "fallback-"+btoa(unescape(encodeURIComponent(value)));
+}
 var utf8=new TextEncoder().encode(value);
 var hashBuffer=await crypto.subtle.digest("SHA-256",utf8);
 return Array.from(new Uint8Array(hashBuffer)).map(function(byte){
@@ -727,12 +732,14 @@ return byte.toString(16).padStart(2,"0");
 }
 
 async function initializeSecurity(){
-var existingStore=localStorage.getItem(credentialStoreKey);
-if(!existingStore){
-var defaultPasswordHash=await sha256("Vayu@123");
+var defaultPasswordHash=await sha256(DEFAULT_OWNER_PASSWORD);
+var store=getCredentialStore();
+if(!store[DEFAULT_OWNER_LOGIN_ID]||!store[DEFAULT_OWNER_LOGIN_ID].passwordHash){
+store[DEFAULT_OWNER_LOGIN_ID]={passwordHash:defaultPasswordHash};
+saveCredentialStore(store);
+}
+if(!localStorage.getItem(ownerHashKey)){
 var defaultOwnerHash=await sha256(DEFAULT_OWNER_KEY);
-var defaults={"owner":{"passwordHash":defaultPasswordHash}};
-localStorage.setItem(credentialStoreKey,JSON.stringify(defaults));
 localStorage.setItem(ownerHashKey,defaultOwnerHash);
 }
 renderUsers();
