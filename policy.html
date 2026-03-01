@@ -431,26 +431,26 @@
         <div class="controls">
           <div class="row">
             <span>Require two-step approval</span>
-            <button class="switch on" aria-label="Require two-step approval"></button>
+            <button id="switchTwoStep" class="switch on" aria-label="Require two-step approval"></button>
           </div>
           <div class="row">
             <span>Enable confidential watermark</span>
-            <button class="switch on" aria-label="Enable confidential watermark"></button>
+            <button id="switchWatermark" class="switch on" aria-label="Enable confidential watermark"></button> 
           </div>
           <div class="row">
             <span>Restrict download</span>
-            <button class="switch" aria-label="Restrict download"></button>
-          </div>
+           <button id="switchDownload" class="switch" aria-label="Restrict download"></button>
+            </div>
           <div class="row">
             <span>Auto-expire temporary policy links</span>
-            <button class="switch on" aria-label="Auto expire links"></button>
+            <button id="switchExpire" class="switch on" aria-label="Auto expire links"></button>
           </div>
         </div>
 
         <div class="actions">
-          <button class="btn primary">Save Controls</button>
-          <button class="btn secondary">Preview Policy Matrix</button>
-          <button class="btn secondary">Close</button>
+           <button id="saveControlsBtn" class="btn primary" type="button">Save Controls</button>
+          <button id="previewMatrixBtn" class="btn secondary" type="button">Preview Policy Matrix</button>
+          <button id="closePolicyBtn" class="btn secondary" type="button">Close</button>
         </div>
       </section>
 
@@ -480,12 +480,105 @@
           </div>
         </section>
 
-        <div class="status">
+         <div class="status" id="policyStatusBox">
           <strong>Control Status:</strong> 7 of 9 policy guardrails active.
           Last synced with governance service at 12:04 PM.
         </div>
       </aside>
     </main>
   </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const storageKey = "vayuPolicyControls";
+      const accessRole = document.getElementById("accessRole");
+      const switches = {
+        twoStep: document.getElementById("switchTwoStep"),
+        watermark: document.getElementById("switchWatermark"),
+        download: document.getElementById("switchDownload"),
+        expire: document.getElementById("switchExpire")
+      };
+
+      const saveBtn = document.getElementById("saveControlsBtn");
+      const previewBtn = document.getElementById("previewMatrixBtn");
+      const closeBtn = document.getElementById("closePolicyBtn");
+      const statusBox = document.getElementById("policyStatusBox");
+
+      function isOn(el) {
+        return el.classList.contains("on");
+      }
+
+      function setSwitch(el, on) {
+        el.classList.toggle("on", on);
+      }
+
+      function toggleSwitch(event) {
+        event.currentTarget.classList.toggle("on");
+      }
+
+      function getState() {
+        return {
+          role: accessRole.value,
+          twoStep: isOn(switches.twoStep),
+          watermark: isOn(switches.watermark),
+          download: isOn(switches.download),
+          expire: isOn(switches.expire)
+        };
+      }
+
+      function setStatus(message) {
+        statusBox.innerHTML = `<strong>Control Status:</strong> ${message}`;
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(storageKey);
+          if (!raw) return;
+          const data = JSON.parse(raw);
+          if (data.role) accessRole.value = data.role;
+          setSwitch(switches.twoStep, !!data.twoStep);
+          setSwitch(switches.watermark, !!data.watermark);
+          setSwitch(switches.download, !!data.download);
+          setSwitch(switches.expire, !!data.expire);
+          setStatus(`Loaded saved controls for <b>${accessRole.value}</b> role.`);
+        } catch (error) {
+          setStatus("Unable to load saved controls. Using current defaults.");
+        }
+      }
+
+      function saveState() {
+        const state = getState();
+        localStorage.setItem(storageKey, JSON.stringify(state));
+        const enabled = Object.values(state).filter((value) => value === true).length;
+        setStatus(`Saved for <b>${state.role}</b> role. ${enabled} advanced controls enabled.`);
+      }
+
+      function previewState() {
+        const state = getState();
+        const flags = [];
+        if (state.twoStep) flags.push("2-step approval");
+        if (state.watermark) flags.push("watermark");
+        if (state.download) flags.push("download restriction");
+        if (state.expire) flags.push("auto-expire links");
+        const summary = flags.length ? flags.join(", ") : "no extra controls";
+        setStatus(`Preview → Role: <b>${state.role}</b>, Controls: ${summary}.`);
+      }
+
+      Object.values(switches).forEach((el) => {
+        el.addEventListener("click", toggleSwitch);
+      });
+
+      saveBtn.addEventListener("click", saveState);
+      previewBtn.addEventListener("click", previewState);
+      closeBtn.addEventListener("click", function () {
+        window.location.assign("index.html");
+      });
+
+      loadState();
+    })();
+  </script>
+
 </body>
 </html>
