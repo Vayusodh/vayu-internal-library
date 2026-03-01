@@ -88,19 +88,6 @@ font-weight:600;
 }
 .guest-sop-btn:hover{background:rgba(56,189,248,0.35);}
 #errorMsg{color:#ff4d4d;margin-top:10px;display:none;}
-#ownerStatus{margin-top:12px;color:#7dd3fc;font-size:13px;min-height:18px;}
-.owner-panel{
-display:none;
-margin-top:16px;
-padding:14px;
-border:1px solid rgba(125,211,252,0.35);
-border-radius:12px;
-background:rgba(15,23,42,0.42);
-text-align:left;
-}
-.owner-panel h4{font-size:15px;margin-bottom:10px;color:#bfdbfe;}
-.owner-help{font-size:12px;color:#bfdbfe;margin-top:10px;line-height:1.4;}
-.owner-users{font-size:13px;color:#e2e8f0;margin-top:10px;line-height:1.5;}
 
 /* LOADER */
 .mechanical-loader{
@@ -359,46 +346,7 @@ background:#38bdf8;color:black;
 }
 .lib-card:hover .lib-sub{color:#111827;}
 
-.policy-modal{
-position:fixed;
-inset:0;
-display:none;
-align-items:center;
-justify-content:center;
-background:rgba(2,6,23,0.82);
-z-index:2200;
-padding:18px;
-}
-.policy-panel{
-width:min(680px,100%);
-background:linear-gradient(180deg,#1e293b,#0f172a);
-border:1px solid rgba(148,163,184,0.4);
-border-radius:18px;
-padding:24px;
-box-shadow:0 24px 45px rgba(2,6,23,0.68);
-}
-.policy-panel h3{color:#7dd3fc;margin-bottom:8px;}
-.policy-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:14px;
-margin-top:16px;
-}
-.policy-block{
-background:rgba(15,23,42,0.78);
-border:1px solid rgba(148,163,184,0.25);
-border-radius:12px;
-padding:12px;
-}
-.policy-block label{display:block;margin-bottom:8px;font-size:14px;color:#cbd5e1;}
-.policy-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;}
-.policy-actions button{
-padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
-}
-.policy-save{background:#22d3ee;color:#082f49;}
-.policy-close{background:#334155;color:#e2e8f0;}
-#policyStatus{margin-top:12px;color:#86efac;font-weight:700;}
-  
+
 /* MEDIA */
 .media-section{
 padding:40px 20px;
@@ -529,47 +477,8 @@ background:#000;padding:60px;text-align:center;
 </div>
 <div class="login-actions">
 <button onclick="checkPassword()" class="login-btn">Secure Login</button>
-<button type="button" class="guest-sop-btn" onclick="openSOP()">☀ Guest SOP Access</button>
-</div>
-<button type="button" class="guest-sop-btn" onclick="toggleOwnerPanel()">Owner Access Control</button>
-
-<div class="owner-panel" id="ownerPanel">
-  <h4>Owner Control (Only You)</h4>
-  <div class="login-row">
-    <label for="ownerKey">Owner Key</label>
-    <input type="password" id="ownerKey" class="login-input" placeholder="Enter owner key">
-  </div>
-  <div class="login-actions" style="justify-content:flex-start;margin-top:10px;">
-    <button type="button" class="login-btn" onclick="unlockOwnerPanel()">Unlock</button>
-  </div>
-
-  <div id="ownerControls" style="display:none;">
-    <div class="login-row">
-      <label for="newLoginId">New Login ID</label>
-      <input type="text" id="newLoginId" class="login-input" placeholder="example: arun">
-    </div>
-    <div class="login-row">
-      <label for="newLoginPassword">New Login Password</label>
-      <input type="password" id="newLoginPassword" class="login-input" placeholder="Create strong password">
-    </div>
-    <div class="login-actions" style="justify-content:flex-start;margin-top:10px;">
-      <button type="button" class="login-btn" onclick="addOrUpdateUser()">Add / Update User</button>
-      <button type="button" class="guest-sop-btn" onclick="removeUser()">Remove User</button>
-    </div>
-    <div class="login-row">
-      <label for="newOwnerKey">Change Owner Key</label>
-      <input type="password" id="newOwnerKey" class="login-input" placeholder="New owner key">
-    </div>
-    <div class="login-actions" style="justify-content:flex-start;margin-top:10px;">
-      <button type="button" class="login-btn" onclick="changeOwnerKey()">Change Owner Key</button>
-    </div>
-    <div class="owner-users" id="ownerUsersList"></div>
-  </div>
-  <div class="owner-help">Tip: Default owner key is <b>VAYU_OWNER</b>. Change it immediately after first login.</div>
-</div>
 
 <p id="errorMsg"></p>
-<p id="ownerStatus"></p>
 </div>
 </div>
 
@@ -594,6 +503,7 @@ background:#000;padding:60px;text-align:center;
 <button type="button" onclick="logout()" class="logout-btn">Logout</button>
 </div>
 <div class="nav-right">
+<button type="button" class="contact-chip" onclick="openSOP()">☀ SOP</button>
 <button type="button" class="contact-chip" onclick="copyPhone()">📞 +91 9971 770 060</button>
 <a class="contact-chip" href="mailto:discovery@vayusodh.com">✉ discovery@vayusodh.com</a>
 </div>
@@ -636,7 +546,7 @@ background:#000;padding:60px;text-align:center;
   <div class="lib-title">SOP</div>
   <div class="lib-sub">Open access for all users</div>
 </div>
-<div class="lib-card" onclick="openPolicyControls()">
+  <div class="lib-card" onclick="openPolicyPage()">
   <div class="sun-icon">☀</div>
   <div class="lib-title">Policy</div>
   <div class="lib-sub">Controlled access with role constraints</div>
@@ -647,34 +557,6 @@ background:#000;padding:60px;text-align:center;
   <div class="lib-sub">Bright workflow templates</div>
 </div>
 </section>
-
-<div class="policy-modal" id="policyModal">
-  <div class="policy-panel">
-    <h3>Policy Control Center</h3>
-    <p>Apply control constraints for policy visibility and approvals.</p>
-    <div class="policy-grid">
-      <div class="policy-block">
-        <label for="policyRole">Access role</label>
-        <select id="policyRole">
-          <option>Viewer</option>
-          <option>Reviewer</option>
-          <option>Approver</option>
-          <option>Admin</option>
-        </select>
-      </div>
-      <div class="policy-block">
-        <label><input type="checkbox" id="policyTwoStep"> Require two-step approval</label>
-        <label><input type="checkbox" id="policyWatermark"> Enable confidential watermark</label>
-        <label><input type="checkbox" id="policyDownload"> Restrict download</label>
-      </div>
-    </div>
-    <div class="policy-actions">
-      <button type="button" class="policy-save" onclick="savePolicyControls()">Save controls</button>
-      <button type="button" class="policy-close" onclick="closePolicyControls()">Close</button>
-    </div>
-    <div id="policyStatus"></div>
-  </div>
-</div>
 
 <section class="media-section">
 <div class="media-wrapper" id="mediaWrapper">
@@ -713,117 +595,8 @@ background:#000;padding:60px;text-align:center;
 </div>
 
 <script>
-var DEFAULT_OWNER_KEY="VAYU_OWNER";
-var DEFAULT_OWNER_LOGIN_ID="owner";
-var DEFAULT_OWNER_PASSWORD="Vayu@123";
-var credentialStoreKey="vayuCredentials";
-var ownerHashKey="vayuOwnerHash";
-var ownerUnlocked=false;
-
-async function sha256(value){
-if(!(window.crypto&&window.crypto.subtle)){
-return "fallback-"+btoa(unescape(encodeURIComponent(value)));
-}
-var utf8=new TextEncoder().encode(value);
-var hashBuffer=await crypto.subtle.digest("SHA-256",utf8);
-return Array.from(new Uint8Array(hashBuffer)).map(function(byte){
-return byte.toString(16).padStart(2,"0");
-}).join("");
-}
-
-async function initializeSecurity(){
-var defaultPasswordHash=await sha256(DEFAULT_OWNER_PASSWORD);
-var store=getCredentialStore();
-if(!store[DEFAULT_OWNER_LOGIN_ID]||!store[DEFAULT_OWNER_LOGIN_ID].passwordHash){
-store[DEFAULT_OWNER_LOGIN_ID]={passwordHash:defaultPasswordHash};
-saveCredentialStore(store);
-}
-if(!localStorage.getItem(ownerHashKey)){
-var defaultOwnerHash=await sha256(DEFAULT_OWNER_KEY);
-localStorage.setItem(ownerHashKey,defaultOwnerHash);
-}
-renderUsers();
-}
-
-function getCredentialStore(){
-try{return JSON.parse(localStorage.getItem(credentialStoreKey)||"{}");}
-catch(e){return {};}
-}
-
-function saveCredentialStore(store){
-localStorage.setItem(credentialStoreKey,JSON.stringify(store));
-renderUsers();
-}
-
-function showOwnerStatus(message,isError){
-var status=document.getElementById("ownerStatus");
-status.style.color=isError?"#fca5a5":"#7dd3fc";
-status.textContent=message;
-}
-
-function toggleOwnerPanel(){
-var panel=document.getElementById("ownerPanel");
-panel.style.display=panel.style.display==="block"?"none":"block";
-}
-
-async function unlockOwnerPanel(){
-var key=document.getElementById("ownerKey").value.trim();
-if(!key){showOwnerStatus("Owner key required.",true);return;}
-var inputHash=await sha256(key);
-var savedHash=localStorage.getItem(ownerHashKey)||"";
-if(inputHash===savedHash){
-ownerUnlocked=true;
-document.getElementById("ownerControls").style.display="block";
-showOwnerStatus("Owner unlocked. You can now control login permissions.",false);
-}else{
-showOwnerStatus("Invalid owner key.",true);
-}
-}
-
-function renderUsers(){
-var store=getCredentialStore();
-var users=Object.keys(store);
-document.getElementById("ownerUsersList").textContent="Allowed Login IDs: "+(users.length?users.join(", "):"none");
-}
-
-async function addOrUpdateUser(){
-if(!ownerUnlocked){showOwnerStatus("Unlock owner panel first.",true);return;}
-var loginId=document.getElementById("newLoginId").value.trim().toLowerCase();
-var password=document.getElementById("newLoginPassword").value;
-if(!loginId||password.length<8){
-showOwnerStatus("Login ID is required and password must be at least 8 characters.",true);
-return;
-}
-var store=getCredentialStore();
-store[loginId]={passwordHash:await sha256(password)};
-saveCredentialStore(store);
-showOwnerStatus("User permission updated for: "+loginId,false);
-document.getElementById("newLoginPassword").value="";
-}
-
-function removeUser(){
-if(!ownerUnlocked){showOwnerStatus("Unlock owner panel first.",true);return;}
-var loginId=document.getElementById("newLoginId").value.trim().toLowerCase();
-if(!loginId){showOwnerStatus("Enter login ID to remove.",true);return;}
-if(loginId==="owner"){showOwnerStatus("Default owner login ID cannot be removed.",true);return;}
-var store=getCredentialStore();
-if(!store[loginId]){showOwnerStatus("Login ID not found.",true);return;}
-delete store[loginId];
-saveCredentialStore(store);
-showOwnerStatus("Login permission removed for: "+loginId,false);
-}
-
-async function changeOwnerKey(){
-if(!ownerUnlocked){showOwnerStatus("Unlock owner panel first.",true);return;}
-var newOwnerKey=document.getElementById("newOwnerKey").value.trim();
-if(newOwnerKey.length<10){
-showOwnerStatus("Owner key must be at least 10 characters.",true);
-return;
-}
-localStorage.setItem(ownerHashKey,await sha256(newOwnerKey));
-document.getElementById("newOwnerKey").value="";
-showOwnerStatus("Owner key changed successfully. Store this securely.",false);
-}
+var DEFAULT_LOGIN_ID="owner";
+var DEFAULT_PASSWORD="Vayu@123";
 
 document.getElementById("password").addEventListener("keyup",function(e){
 if(e.key==="Enter"){checkPassword();}
@@ -831,8 +604,7 @@ if(e.key==="Enter"){checkPassword();}
 document.getElementById("loginId").addEventListener("keyup",function(e){
 if(e.key==="Enter"){checkPassword();}
 });
-window.onload=async function(){
-await initializeSecurity();
+window.onload=function(){
 if(sessionStorage.getItem("accessGranted")==="yes"){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("mainContent").style.display="block";
@@ -847,10 +619,7 @@ document.getElementById("errorMsg").innerHTML="Login ID and password are require
 document.getElementById("errorMsg").style.display="block";
 return;
 }
-var store=getCredentialStore();
-var userRecord=store[loginId];
-var passwordHash=await sha256(password);
-if(userRecord&&userRecord.passwordHash===passwordHash){
+if(loginId===DEFAULT_LOGIN_ID&&password===DEFAULT_PASSWORD){
 document.getElementById("errorMsg").style.display="none";
 document.getElementById("loginBox").style.display="none";
 document.getElementById("gearLoader").style.display="flex";
@@ -870,22 +639,7 @@ navigator.clipboard.writeText("+919971770060");
 alert("Phone number copied!");
 }
 function openSOP(){window.location.href="sop.html";}
-function openPolicyControls(){
-document.getElementById("policyModal").style.display="flex";
-document.getElementById("policyStatus").innerHTML="";
-}
-function closePolicyControls(){
-document.getElementById("policyModal").style.display="none";
-}
-function savePolicyControls(){
-var role=document.getElementById("policyRole").value;
-var constraints=[];
-if(document.getElementById("policyTwoStep").checked){constraints.push("2-step approval");}
-if(document.getElementById("policyWatermark").checked){constraints.push("watermark");}
-if(document.getElementById("policyDownload").checked){constraints.push("download restriction");}
-var summary=constraints.length?constraints.join(", "):"no extra constraints";
-document.getElementById("policyStatus").innerHTML="Saved: "+role+" role with "+summary+".";
-}
+function openPolicyPage(){window.location.href="policy.html";}
 function searchContent(){
 var input=document.getElementById("searchInput").value.toLowerCase();
 var content=document.querySelector(".about").innerText.toLowerCase();
