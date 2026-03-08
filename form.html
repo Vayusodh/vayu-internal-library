@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAYU | Form Hub</title>
+  <style>
+    :root{
+      --bg:#050a16;
+      --panel:#0d1930;
+      --panel-soft:#132341;
+      --line:rgba(125,169,219,.28);
+      --text:#ecf5ff;
+      --muted:#9db6d2;
+      --accent:#3dd9ff;
+      --accent2:#5d7dff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;
+      font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at -10% -5%,rgba(61,217,255,.2),transparent 65%),
+        radial-gradient(900px 500px at 110% 110%,rgba(93,125,255,.2),transparent 62%),
+        linear-gradient(160deg,#030712,#081126 50%,#040812);
+      padding:28px 14px;
+    }
+    .page{
+      width:min(1120px,95vw);
+      margin:0 auto;
+      border:1px solid var(--line);
+      border-radius:26px;
+      overflow:hidden;
+      background:linear-gradient(165deg,rgba(9,16,34,.9),rgba(3,8,18,.94));
+      box-shadow:0 30px 70px rgba(0,0,0,.45);
+    }
+    .top{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:22px 24px;
+      border-bottom:1px solid rgba(125,169,219,.2);
+      background:linear-gradient(90deg,rgba(61,217,255,.14),rgba(93,125,255,.14));
+    }
+    .brand h1{font-size:clamp(1.1rem,2.4vw,1.5rem)}
+    .brand p{color:var(--muted);font-size:.9rem;margin-top:4px}
+    .home-btn{
+      border:1px solid rgba(61,217,255,.4);
+      background:rgba(5,15,34,.75);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 15px;
+      text-decoration:none;
+      font-weight:600;
+    }
+    .content{padding:22px;display:grid;gap:16px}
+    .intro{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      background:var(--panel);
+      line-height:1.6;
+      color:#d5e7f8;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      background:linear-gradient(165deg,var(--panel-soft),#0d1a31);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:190px;
+    }
+    .card h3{font-size:1rem}
+    .card p{font-size:.9rem;color:var(--muted);line-height:1.5;flex:1}
+    .meta{font-size:.8rem;color:#c8ddf2}
+    .open-btn{
+      border:none;
+      border-radius:10px;
+      padding:10px 12px;
+      font-weight:700;
+      background:linear-gradient(120deg,var(--accent),#8df2ff);
+      color:#062036;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <div class="brand">
+        <h1>Form Hub</h1>
+        <p>Quick access to common project lifecycle and event forms.</p>
+      </div>
+      <a class="home-btn" href="index.html">⬅ Return Home</a>
+    </header>
+
+    <section class="content">
+      <article class="intro">
+        This section includes solid action buttons for key templates: <strong>Tender</strong>,
+        <strong>Project Handover File</strong>, <strong>Test &amp; Calibration Certificate</strong>,
+        <strong>Expo</strong>, and <strong>Conference</strong>.
+      </article>
+
+      <section class="grid" aria-label="Form options">
+        <article class="card">
+          <h3>Tender Form</h3>
+          <p>Use this form to start bid proposals, approvals, and submission tracking.</p>
+          <div class="meta">Category: Commercial</div>
+          <button class="open-btn" type="button" onclick="notify('Tender Form')">Open Tender</button>
+        </article>
+
+        <article class="card">
+          <h3>Project Handover File</h3>
+          <p>Capture completion checklist, transfer records, and team sign-off details.</p>
+          <div class="meta">Category: Project Delivery</div>
+          <button class="open-btn" type="button" onclick="notify('Project Handover File')">Open Handover</button>
+        </article>
+
+        <article class="card">
+          <h3>Test &amp; Calibration Certificate</h3>
+          <p>Document calibration values, instrument references, and verification approval.</p>
+          <div class="meta">Category: QA / QC</div>
+          <button class="open-btn" type="button" onclick="notify('Test & Calibration Certificate')">Open Certificate</button>
+        </article>
+
+        <article class="card">
+          <h3>Expo Form</h3>
+          <p>Plan participation details, booth requirements, and exhibition deliverables.</p>
+          <div class="meta">Category: Marketing Events</div>
+          <button class="open-btn" type="button" onclick="notify('Expo Form')">Open Expo</button>
+        </article>
+
+        <article class="card">
+          <h3>Conference Form</h3>
+          <p>Track conference agenda, speaker logistics, and documentation workflow.</p>
+          <div class="meta">Category: Corporate Events</div>
+          <button class="open-btn" type="button" onclick="notify('Conference Form')">Open Conference</button>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    function notify(formName){
+      window.alert(formName + " module is ready. Attach your final template file to enable full workflow.");
+    }
+  </script>
+</body>
+</html>
