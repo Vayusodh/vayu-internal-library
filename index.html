@@ -552,10 +552,10 @@ background:#000;padding:60px;text-align:center;
   <div class="lib-title">Policy</div>
   <div class="lib-sub">Controlled access with role constraints</div>
 </div>
-<div class="lib-card">
+<div class="lib-card" onclick="openFormsPage()">
   <div class="sun-icon">☀</div>
   <div class="lib-title">Form</div>
-  <div class="lib-sub">Bright workflow templates</div>
+  <div class="lib-sub">Tender, handover & events templates</div>
 </div>
 </section>
 
@@ -641,6 +641,7 @@ alert("Phone number copied!");
 }
 function openSOP(){window.location.href="sop.html";}
 function openPolicyPage(){window.location.href="policy.html";}
+function openFormsPage(){window.location.href="form.html";}
 function searchContent(){
 var input=document.getElementById("searchInput").value.toLowerCase();
 var content=document.querySelector(".about").innerText.toLowerCase();
